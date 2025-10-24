@@ -3,10 +3,10 @@
   .wrapper{
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    gap: 3.75rem;
     @media screen and (min-width: 60rem) {
       display: flex;
-      gap: 120px;
+      gap: 7.5rem;
       flex-direction: row;
       align-items: stretch;
     }
@@ -28,7 +28,7 @@
   }
   
   @media screen and (min-width: 48rem) {
-    max-width: 334px;
+    max-width: 20.875rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,22 +40,15 @@
 
 .cta-image {
   flex: 1;
-  min-height: 366px;
+  min-height: 22.875rem;
   height: auto;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 0.625rem;
 
   @media (min-width: 60rem) {
-    max-width: 610px;
-    min-height: 566px;
+    max-width: 38.125rem;
+    min-height: 35.375rem;
   }
-
-  /* img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  } */
 }
 
 .header-image-image{
@@ -164,10 +157,6 @@
   }
 }
 
-/* .block-editor-block-list__block section{
-  border: 1px solid #00000052;
-} */
-
 .hero {
   height: 35.625rem;
   position: relative;
@@ -213,27 +202,27 @@
     display: flex;
     align-items: center;
     z-index: 10;
-    @media(min-width:1618px) {
+    @media(min-width:101.125rem) {
       /* justify-content: center; */
     }
 
     .text{
       color: #F8F8F8;
-      margin-bottom: 20px;
+      margin-bottom: 1.25rem;
     }
 
     .hero-text {
       margin-bottom: 1.875rem;
       margin-top: 10.9375rem;
       max-width: 18.5rem;
-      margin-left: 30px;
+      margin-left: 1.875rem;
 
       @media(min-width:48rem) {
         max-width: 28.125rem;
         margin-bottom: 4.625rem;
-        margin-left: 210px;
+        margin-left: 13.125rem;
       }
-      @media(min-width:1618px) {
+      @media(min-width:101.125rem) {
         margin-left: 0;
       }
 
@@ -246,7 +235,7 @@
         @media(min-width:48rem) {
           font-size: 4.375rem;
           line-height: 1;
-          margin-bottom: 20px;
+          margin-bottom: 1.25rem;
 
         }
       }
@@ -267,16 +256,16 @@
   .inner-text{
     position: relative;
     font-family: var(--font-family-handwritten);
-    font-size: 22px;
-    line-height: 22px;
+    font-size: 1.375rem;
+    line-height: 1.375rem;
     color: #fff;
-    max-width: 194px;
+    max-width: 12.125rem;
     text-align: center;
-    margin-left: 40px;
-    margin-top: 30px;
+    margin-left: 2.5rem;
+    margin-top: 1.875rem;
     @media screen and (min-width: 60rem) {
-      margin-left: 65px;
-      margin-top: 78px;
+      margin-left: 4.0625rem;
+      margin-top: 4.875rem;
     }
     .arrow-hero{
       position: absolute;

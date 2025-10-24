@@ -65,10 +65,6 @@ body{
     }
 }
 
-.bg-yellow{
-    background: var(--black-bg-color);
-}
-
 .wrapper {
     position: relative;
     width: calc(100% - 4rem);
