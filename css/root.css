@@ -1,0 +1,15 @@
+/* 
+    bp-mobile: 30rem;
+    bp-tablet: 48rem;
+    bp-desktop-small: 60rem;
+    bp-desktop-medium: 80rem;
+    bp-desktop-large: 90rem; 
+*/
+
+:root {
+    --primary-text-color: #000;
+    --secundairy-text-color: #fff;
+    --black-bg-color: #000;
+    --white-bg-color: #fff;
+    --font-family-text: 'Roboto', sans-serif;
+}

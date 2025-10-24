@@ -1,0 +1,21 @@
+{
+    "name": "acf/cta",
+    "title": "CTA",
+    "description": "A custom block.",
+    "style": [ "" ],
+    "category": "formatting",
+    "editorStyle": [ "file:../../style.css" ],
+    "icon": "admin-comments",
+    "keywords": ["cta", "text"],
+    "supports": {
+        "align": false
+    },
+    "acf": {
+        "blockVersion": 3,
+        "mode": "preview",
+        "renderTemplate": "render.php",
+        "postTypes": []
+    },
+    "render_callback": "my_acf_block_render_callback",
+    "align": "full"
+}

@@ -1,0 +1,117 @@
+:root {
+    color-scheme: dark light;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+html {
+    color-scheme: light;
+    font-family: var(--font-family-text);
+    line-height: 1.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+}
+
+body{
+    background: var(--white-bg-color);
+    min-height: 100vh;
+    color: var(--primary-text-color);
+    &.menu-is-open {
+        overflow: hidden;
+    }
+}
+
+#site-container {
+    position: relative;
+    overflow: hidden;
+}
+
+#content {
+    padding-top: 6.25rem;
+    section:first-of-type:not(.hero) {
+        margin-top: 0;
+    }
+}
+
+.cover-image {
+    position: relative;
+    width: 100%;
+
+    > img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        object-fit: cover;
+    }
+}
+
+.align-image-top{
+    .cover-image{
+        > img{
+            object-position: top;
+        }
+    }
+}
+
+.bg-yellow{
+    background: var(--black-bg-color);
+}
+
+.wrapper {
+    position: relative;
+    width: calc(100% - 4rem);
+    max-width: 68.75rem;
+    margin: 0 auto;
+
+    @media (min-width: 48rem) {
+        width: calc(100% - 6rem);
+    }
+
+    @media (min-width: 60rem) {
+        width: 85%;
+    }
+}
+
+.with-margin {
+    margin: 3rem 0;
+
+    @media (min-width: 80rem) {
+        margin: 4rem 0;
+    }
+    @media (min-width: 90rem) {
+        margin: 6.25rem 0;
+    }
+}
+
+.with-padding {
+    padding: 3rem 0;
+
+    @media (min-width: 80rem) {
+        padding: 4rem 0;
+    }
+    @media (min-width: 90rem) {
+        padding: 6.25rem 0;
+    }
+}
+
+.full-width{
+    width: calc(100% - 1.25rem);
+    margin: 0 auto;
+    border-radius: 0.625rem;
+    max-width: 112.5rem;
+    @media (min-width: 80rem) {
+        border-radius: 1.25rem;
+    }
+}

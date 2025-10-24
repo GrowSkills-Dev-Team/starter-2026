@@ -1,0 +1,28 @@
+{
+  "name": "acf/body",
+  "title": "Body",
+  "description": "Een blok voor bodytekst.",
+  "category": "text",
+  "icon": "editor-alignleft",
+  "editorStyle": [ "file:../../style.css" ],
+  "keywords": ["tekst", "body", "content"],
+  "acf": {
+        "mode": "auto",
+        "renderTemplate": "render.php",
+        "postTypes": [],
+        "blockVersion": 3
+  },
+  "supports": {
+      "align": false
+  },
+  "render_callback": "my_acf_block_render_callback",
+  "align": "full",
+  "example": {
+    "attributes": {
+        "mode": "preview",
+        "data": {
+            "preview_image_help": "blocks/body/preview.jpg"
+        }
+    }
+  }
+}

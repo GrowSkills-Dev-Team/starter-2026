@@ -1,0 +1,50 @@
+/* These styling is for preview blocks in wp-admin pages */
+.wp-block {
+    margin: 0 auto 1rem;
+    max-width: none;
+}
+
+.block-editor-writing-flow {
+    padding: 0 2rem 2rem;
+}
+
+.editor-post-title {
+    margin: 0 auto .3rem !important;
+}
+
+.growskills-block {
+    display: flex;
+    align-items: center;
+    padding: .8rem;
+    background-color: #f0f0f1;
+    border: 1px solid #dcdcde;
+    pointer-events: all;
+}
+
+.growskills-block:hover {
+    background-color: #f6f7f7;
+    cursor: pointer;
+}
+
+.growskills-block:hover .growskills-block-edit {
+    opacity: .5;
+    transform: translateX(0);
+}
+
+.growskills-block-icon {
+    margin-right: .5rem;
+    opacity: .7;
+}
+
+.growskills-block-title {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.growskills-block-edit {
+    margin-left: auto;
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: all .2s ease;
+}

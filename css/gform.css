@@ -1,0 +1,48 @@
+#site-container .gform_wrapper {
+    .gform_footer {
+      justify-content: flex-end;
+    }
+    .gform_heading{
+        display: none!important;
+    }
+    &.gravity-theme .gfield textarea.large{
+      height: 0;
+    }
+    form {
+      position: relative;
+      max-width: rem(43.75rem);
+      input[type="text"], input[type="tel"], input[type="email"], input[type="number"], input[type="password"], textarea {
+        font-size: 1rem;
+        background: #F3F3F3;
+        padding: 0.75rem 1.0625rem 0.875rem;
+        border-radius: 0;
+        border: 0.0625rem solid #F3F3F3;
+        &::-webkit-input-placeholder {
+            color: #878787;
+        }
+        &:-moz-placeholder {
+            color: #878787;
+        }
+    
+        &::-moz-placeholder {
+            color: #878787;
+        }
+    
+        &:-ms-input-placeholder {
+            color: #878787;
+        }
+        &:focus{
+          outline: 0;
+          border: 0.0625rem solid var(--black-bg-color);
+        }
+      }
+      textarea{
+        min-height: 6.875rem;
+        resize: vertical;
+      }
+      button[type="submit"] {
+        border: medium none;
+        cursor: pointer;
+      }
+    }
+  }

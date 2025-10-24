@@ -1,0 +1,41 @@
+header{
+    transition: all 0.3s ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 0.75rem 0;
+    background: var(--white-bg-color);
+    
+    .wrapper{
+        @media (min-width: 60rem) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    }
+    
+    &.fixed{
+        filter: drop-shadow(0rem 0rem 1.25rem rgba(0, 0, 0, 0.2));
+    }
+}
+
+.header-logo{
+    transition: all 0.3s ease-in-out;
+    display: block;
+    width: 6rem;
+    @media (min-width: 60rem) {
+        width: 8rem;
+    }
+    img, svg{
+        display: block;
+        width: 100%;
+        max-width: none;
+    }
+    .fixed & {
+        @media (min-width: 60rem) {
+            width: 6.25rem;
+        }
+    }
+}

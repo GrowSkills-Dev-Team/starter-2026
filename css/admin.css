@@ -1,0 +1,14 @@
+.editor-editor-interface .interface-interface-skeleton__content{
+    padding: 0 2.5rem!important;  
+}
+
+.block-editor-iframe__html{
+    section:not(.header-image){
+        margin: 0!important;
+        padding: 6.25rem 0!important;
+
+        a{
+            pointer-events: none;
+        }
+    }
+}

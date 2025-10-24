@@ -1,0 +1,38 @@
+footer{
+    position: relative;
+    .wrapper{
+        h2, h3, h4, p, a{
+            margin: 0;
+        }
+        h2, h3, h4{
+            font-size: 1.875rem;
+            margin-bottom: 0.9375rem;
+        }
+    }
+}
+
+.footer-content{
+    background: #F8F8F8;
+    .wrapper{
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        div{
+            grid-column: span 4;
+            li{
+                padding-left: 0!important;
+                a{
+                    &:hover{
+                        color: rgb(104, 104, 104);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.footer-copyright{
+    padding: 1rem 0;
+    .wrapper{
+        text-align: center;
+    }
+}
