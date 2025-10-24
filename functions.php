@@ -129,14 +129,6 @@ function ajax_load_more()
     wp_die();
 }
 
-add_filter('acf/settings/load_json', function ($paths) {
-    $blocks_dir = get_template_directory() . '/blocks';
-    foreach (glob($blocks_dir . '/*', GLOB_ONLYDIR) as $block_folder) {
-        $paths[] = $block_folder;
-    }
-    return $paths;
-});
-
 add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context) {
     $blocks_directory = __DIR__ . '/blocks/';
     $single_blocks_directory = glob($blocks_directory . '*/', GLOB_ONLYDIR);
@@ -155,41 +147,6 @@ add_action('init', function () {
             register_block_type($block_folder);
         }
     }
-});
-
-add_filter('acf/settings/save_json', function () {
-    return get_template_directory() . '/acf-json';
-});
-
-// function my_acf_block_render_callback($block, $content = '', $is_preview = false, $post_id = 0)
-// {
-//     $slug = str_replace('acf/', '', $block['name']);
-//     $block_dir = get_template_directory() . "/blocks/{$slug}";
-//     $preview_image = $block['data']['preview_image_help'] ?? false;
-
-//     if ($is_preview) {
-//         if ($preview_image && file_exists("$block_dir/preview.jpg")) {
-//             $img_url = get_template_directory_uri() . "/blocks/{$slug}/preview.jpg";
-//             echo '<img src="' . esc_url($img_url) . '" alt="Preview" style="width:100%;height:auto;">';
-//         } else {
-//             echo '<div class="growskills-block">';
-//             echo '<span class="growskills-block-icon dashicons dashicons-' . esc_attr($block['icon']) . '"></span>';
-//             echo '<span class="growskills-block-title">' . esc_html($block['title']) . '</span>';
-//             echo '<span class="growskills-block-edit dashicons dashicons-edit"></span>';
-//             echo '</div>';
-//         }
-//     } else {
-//         $template = "$block_dir/render.php";
-//         if (file_exists($template)) {
-//             include $template;
-//         } else {
-//             echo "<p>⚠️ Templatebestand ontbreekt: $template</p>";
-//         }
-//     }
-// }
-
-add_action('enqueue_block_editor_assets', function () {
-    wp_enqueue_style('growskills-core-editor-style', get_template_directory_uri() . '/includes/blocks.css', [], '1.0');
 });
 
 //image alt
