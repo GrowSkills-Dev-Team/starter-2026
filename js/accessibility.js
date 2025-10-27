@@ -59,34 +59,6 @@
     }
 
     /**
-     * Color contrast checker and warnings
-     */
-    function initContrastChecker() {
-        $('.body-block').each(function() {
-            const block = $(this);
-            const bgColor = block.css('background-color');
-            const textColor = block.css('color');
-            
-            if (bgColor && textColor) {
-                const contrast = calculateContrastRatio(bgColor, textColor);
-                
-                if (contrast < 4.5) {
-                    block.addClass('low-contrast');
-                    
-                    // Add warning for screen readers
-                    if (!block.find('.contrast-warning').length) {
-                        block.prepend(
-                            '<span class="screen-reader-text contrast-warning">' +
-                            'Warning: This content may have insufficient color contrast.' +
-                            '</span>'
-                        );
-                    }
-                }
-            }
-        });
-    }
-
-    /**
      * ARIA live regions for dynamic content
      */
     function initAriaLiveRegions() {

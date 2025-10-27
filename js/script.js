@@ -37,34 +37,21 @@ function toggleMenu() {
 }
 
 function openMenu() {
-    // 1. Scroll lock – jouw bestaande logica
     scrollPosition = window.scrollY;
     document.body.classList.add('menu-is-open');
-
-    // 2. Mobiel menu zichtbaar maken voor screenreaders
     mobileMenu.hidden = false;
-
-    // 3. Focus trap initialiseren
     focusableElements = mobileMenu.querySelectorAll(focusableSelectors);
     if (focusableElements.length) {
         focusableElements[0].focus();
     }
-
-    // 4. ESC + Trap listeners toevoegen
     document.addEventListener('keydown', handleKeyDown);
 }
 
 function closeMenu() {
     document.body.classList.remove('menu-is-open');
     window.scrollTo({top: scrollPosition, behavior: 'auto'});
-
-    // Verberg menu semantisch
     mobileMenu.hidden = true;
-
-    // Focus terug naar burger button
     headerBurger.focus();
-
-    // Event listener opruimen
     document.removeEventListener('keydown', handleKeyDown);
 }
 
@@ -73,7 +60,6 @@ function handleKeyDown(e) {
         closeMenu();
     }
 
-    // Focus trap
     if (e.key === 'Tab' && focusableElements) {
         const first = focusableElements[0];
         const last = focusableElements[focusableElements.length - 1];
