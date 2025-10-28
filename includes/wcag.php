@@ -86,27 +86,6 @@ function add_aria_current_to_nav_menu($atts, $item, $args, $depth) {
 add_filter('nav_menu_link_attributes', 'add_aria_current_to_nav_menu', 10, 4);
 
 /**
- * Add accessibility attributes to search form
- */
-function accessible_search_form($form) {
-    $form = '<form role="search" method="get" class="search-form" action="' . esc_url(home_url('/')) . '">
-        <label for="search-field" class="search-label">
-            <span class="screen-reader-text">' . esc_html__('Search for:', 'starter-theme-2025') . '</span>
-        </label>
-        <input type="search" id="search-field" class="search-field" placeholder="' . esc_attr__('Search...', 'starter-theme-2025') . '" value="' . get_search_query() . '" name="s" aria-label="' . esc_attr__('Search', 'starter-theme-2025') . '" />
-        <button type="submit" class="search-submit" aria-label="' . esc_attr__('Submit search', 'starter-theme-2025') . '">
-            <span class="screen-reader-text">' . esc_html__('Search', 'starter-theme-2025') . '</span>
-            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24">
-                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-            </svg>
-        </button>
-    </form>';
-    
-    return $form;
-}
-add_filter('get_search_form', 'accessible_search_form');
-
-/**
  * Improve image accessibility for wp_get_attachment_image
  */
 function add_image_accessibility($attr, $attachment, $size) {

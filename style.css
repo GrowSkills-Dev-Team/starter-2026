@@ -17,6 +17,7 @@ Version: 2.0.0
 @import url(./css/content.css);
 @import url(./css/footer.css);
 @import url(./css/gform.css);
+@import url(./css/search.css);
 
 /* Wordpress Admin styles */
 @import url(./css/admin.css);

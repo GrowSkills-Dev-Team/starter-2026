@@ -11,13 +11,14 @@ get_header();
 
         <p><?php _e( 'De pagina die je zoekt lijkt niet te bestaan. Misschien kun je hieronder zoeken?', 'textdomain' ); ?></p>
 
+        <?php var_dump( has_filter('get_search_form') ); ?>
+
         <?php get_search_form(); ?>
 
-        <p>
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                <?php _e( 'Terug naar de homepage', 'textdomain' ); ?>
-            </a>
-        </p>
+        <a class="btn" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+            <?php _e( 'Terug naar de homepage', 'textdomain' ); ?>
+        </a>
+        
     </div>
 </section>
 <?php

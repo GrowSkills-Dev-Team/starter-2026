@@ -1,22 +1,9 @@
-<?php
-/**
- * Accessible search form template
- */
-?>
-
-<form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-    <label for="search-field" class="screen-reader-text">
-        <?php _e( 'Zoek naar:', 'textdomain' ); ?>
+<form role="search" method="get" class="search-form" action="<?= esc_url(home_url('/')); ?>">
+    <label for="search-field" class="search-label">
+        <span class="screen-reader-text"><?= esc_html__('Search for:', 'starter-theme-2025'); ?></span>
     </label>
-    <input type="search"
-           id="search-field"
-           class="search-field"
-           placeholder="<?php esc_attr_e( 'Zoeken…', 'textdomain' ); ?>"
-           value="<?php echo get_search_query(); ?>"
-           name="s"
-           aria-label="<?php esc_attr_e( 'Zoekterm', 'textdomain' ); ?>" />
-    
-    <button type="submit" class="search-submit">
-        <?php esc_html_e( 'Zoeken', 'textdomain' ); ?>
+    <input type="search" id="search-field" class="search-field" placeholder="<?= esc_attr__('Search...', 'starter-theme-2025'); ?>" value="<?= get_search_query(); ?>" name="s" aria-label="<?= esc_attr__('Search', 'starter-theme-2025'); ?>" />
+    <button type="submit" class="btn search-submit" aria-label="<?= esc_attr__('Submit search', 'starter-theme-2025'); ?>">
+        <span class="screen-reader-text"><?= esc_html__('Search', 'starter-theme-2025'); ?></span>
     </button>
 </form>
