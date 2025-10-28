@@ -16,3 +16,13 @@
         outline: none;
     }
 }
+
+.search-result-item{
+    padding: 1.25rem 0;
+    border-top: 0.0625rem solid #D9D9D9;
+    border-bottom: 0.0625rem solid #D9D9D9;
+
+    .btn{
+        margin-top: 0.625rem;
+    }
+}
