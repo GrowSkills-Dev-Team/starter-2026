@@ -33,7 +33,7 @@ add_action('after_setup_theme', 'setup_accessibility_features');
  */
 function accessibility_fallback_menu() {
     echo '<ul id="primary-menu" class="nav-menu" role="menubar">';
-        echo '<li role="none"><a href="' . esc_url(home_url('/')) . '" role="menuitem">' . esc_html__('Home', 'starter-theme-2025') . '</a></li>';
+        echo '<li role="none"><a href="' . esc_url(home_url('/')) . '" role="menuitem">' . esc_html__('Home', 'starter-theme') . '</a></li>';
     echo '</ul>';
 }
 
@@ -60,9 +60,9 @@ function enqueue_accessibility_assets() {
     
     // Localize script for accessibility
     wp_localize_script('accessibility-script', 'accessibility_vars', array(
-        'menu_expanded' => esc_html__('Menu expanded', 'starter-theme-2025'),
-        'menu_collapsed' => esc_html__('Menu collapsed', 'starter-theme-2025'),
-        'skip_to_content' => esc_html__('Skip to main content', 'starter-theme-2025'),
+        'menu_expanded' => esc_html__('Menu expanded', 'starter-theme'),
+        'menu_collapsed' => esc_html__('Menu collapsed', 'starter-theme'),
+        'skip_to_content' => esc_html__('Skip to main content', 'starter-theme'),
     ));
 }
 add_action('wp_enqueue_scripts', 'enqueue_accessibility_assets');
@@ -93,7 +93,7 @@ function add_image_accessibility($attr, $attachment, $size) {
     if (empty($attr['alt'])) {
         $alt_text = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
         if (empty($alt_text)) {
-            $attr['alt'] = sprintf(esc_html__('Image: %s', 'starter-theme-2025'), get_the_title($attachment->ID));
+            $attr['alt'] = sprintf(esc_html__('Image: %s', 'starter-theme'), get_the_title($attachment->ID));
         }
     }
     
@@ -145,7 +145,7 @@ function fix_wysiwyg_image_alt($content) {
                 
                 // If still no alt text, use generic description
                 if (empty($alt_text)) {
-                    $alt_text = esc_html__('Image', 'starter-theme-2025');
+                    $alt_text = esc_html__('Image', 'starter-theme');
                 }
                 
                 // Add alt attribute to img tag
@@ -153,7 +153,7 @@ function fix_wysiwyg_image_alt($content) {
                 $content = str_replace($img_tag, $new_img_tag, $content);
             } else {
                 // No attachment ID found, add generic alt
-                $new_img_tag = str_replace('<img', '<img alt="' . esc_attr__('Image', 'starter-theme-2025') . '"', $img_tag);
+                $new_img_tag = str_replace('<img', '<img alt="' . esc_attr__('Image', 'starter-theme') . '"', $img_tag);
                 $content = str_replace($img_tag, $new_img_tag, $content);
             }
         }
@@ -199,7 +199,7 @@ add_action('admin_footer-post-new.php', 'add_alt_text_media_notice');
  * Add text domain for translations
  */
 function load_theme_textdomain_accessibility() {
-    load_theme_textdomain('starter-theme-2025', get_template_directory() . '/languages');
+    load_theme_textdomain('starter-theme', get_template_directory() . '/languages');
 }
 add_action('after_setup_theme', 'load_theme_textdomain_accessibility');
 
