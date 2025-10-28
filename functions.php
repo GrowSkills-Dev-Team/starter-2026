@@ -4,6 +4,7 @@ define('THEME_URI', get_template_directory_uri());
 
 require_once('includes/default-settings.php');
 require_once('includes/post-types.php');
+require_once('includes/image-optim.php');
 require_once('includes/wcag.php');
 
 add_action('after_setup_theme', function () {
@@ -18,7 +19,6 @@ add_filter('show_admin_bar', '__return_false');
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script( 'wp-a11y' );
     wp_dequeue_style('wp-block-library');
-    wp_enqueue_style( 'dashicons' );
     wp_enqueue_style('stylesheet', get_stylesheet_uri(), [], filemtime(THEME_PATH . '/style.css'));
     wp_enqueue_script('script', THEME_URI . '/js/script.js', [], filemtime(THEME_PATH . '/js/script.js'), true);
     // wp_localize_script('script', 'ajax', ['url' => admin_url('admin-ajax.php')]);

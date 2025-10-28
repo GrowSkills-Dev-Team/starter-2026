@@ -9,14 +9,12 @@ if($title || $image) : ?>
   <div class="wrapper">
       <div class="cta-text">
          <?= ($title ? '<h3>' . $title . '</h3>' : null); ?>
-        <p><?= ($text ? $text : null); ?></p>
+        <?= ($text ? '<p>' . $text . '</p>' : null); ?>
         <?= ($button ? '<div><a class="btn" href="'. $button['url'] .'">'. $button['title'] .'</a></div>' : null); ?>
       </div>
       <div class="cta-image cover-image">
-      <?= ($image ? wp_get_attachment_image($image, 'full') : null); ?>
+        <?= theme_image($image, 'content', ''); ?>
       </div>
   </div>
 </section>
 <?php endif;
-  
-

@@ -6,7 +6,8 @@ $overview_text = get_field('overview_text', $item);
 
 <a href="<?= get_the_permalink($item) ?>" class="overview-item">
     <div class="overview-item-image cover-image">
-       <?= get_the_post_thumbnail($item) ?>
+        <?php $image_id = get_post_thumbnail_id($item); ?>
+        <?= theme_image($image_id, 'small', 'overview-image'); ?>
     </div>
     <div class="overview-item-text">
         <h3><?= get_the_title($item) ?></h3>

@@ -5,14 +5,13 @@ $title = get_field('title');
 $button = get_field('button');
 $text = get_field('text');
 
-if (empty($image) && empty($title)) {
-    return;
-}
+if (!empty($image) && !empty($title)) :
+
 ?>
 
 <section class="hero with-shape">
     <div class="hero-image cover-image" style="--valign: <?php echo esc_attr($align_image ?: '50%'); ?>;">
-        <?= ($image ? wp_get_attachment_image($image, 'full') : null); ?>
+        <?= theme_image($image, 'hero', 'hero-image'); ?>
     </div>
     <div class="wrapper">
         <div class="hero-text">
@@ -22,3 +21,5 @@ if (empty($image) && empty($title)) {
         </div>
     </div>
 </section>
+
+<?php endif;
