@@ -2,11 +2,11 @@
 global $post;
 $item = $args['item'] ?? $post;
 $overview_text = get_field('overview_text', $item);
+$image_id = get_post_thumbnail_id($item);
 ?>
 
 <a href="<?= get_the_permalink($item) ?>" class="overview-item">
     <div class="overview-item-image cover-image">
-        <?php $image_id = get_post_thumbnail_id($item); ?>
         <?= theme_image($image_id, 'small', 'overview-image'); ?>
     </div>
     <div class="overview-item-text">
