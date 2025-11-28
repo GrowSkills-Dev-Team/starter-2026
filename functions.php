@@ -184,3 +184,37 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $attachment, $
     return $attr;
 }, 10, 3);
 
+
+//widgets funtions
+function gs_dashboard_quick_links_widget() {
+    wp_add_dashboard_widget(
+        'gs_quick_links',
+        'Quick Content Actions',
+        'gs_render_quick_links'
+    );
+}
+add_action('wp_dashboard_setup', 'gs_dashboard_quick_links_widget');
+
+function gs_render_quick_links() {
+
+    $post_types = get_post_types(
+        ['public' => true, '_builtin' => false],
+        'objects'
+    );
+
+    echo '<div style="padding:10px;">';
+
+    echo '<p><a href="' . admin_url('post-new.php?post_type=page') . '" class="button button-primary" style="margin-bottom:6px;">Create New Page</a></p>';
+
+    echo '<p><a href="' . admin_url('post-new.php') . '" class="button" style="margin-bottom:6px;">Create New Post</a></p>';
+
+    if (!empty($post_types)) {
+        foreach ($post_types as $pt) {
+            echo '<p><a href="' . admin_url('post-new.php?post_type=' . $pt->name) . '" class="button" style="margin-bottom:6px;">Add New ' . $pt->labels->singular_name . '</a></p>';
+        }
+    } else {
+        echo '<p>No custom post types found.</p>';
+    }
+
+    echo '</div>';
+}
