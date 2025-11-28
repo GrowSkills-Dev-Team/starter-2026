@@ -169,11 +169,9 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $attachment, $
                         (is_array($field['value']) && in_array($attachment->ID, $field['value']))
                     )
                 ) {
-                    // Gera nome legível da section, ex: hero_image -> Hero section
                     $section_name = ucwords(str_replace(['_', '-'], ' ', $field['name']));
                     $section_name = str_replace('Image', 'Section', $section_name);
 
-                    // Monta alt automaticamente
                     $alt_text = "{$section_name} - " . get_the_title($post->ID);
                     $attr['alt'] = esc_attr($alt_text);
                     return $attr;
@@ -185,3 +183,4 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $attachment, $
 
     return $attr;
 }, 10, 3);
+
