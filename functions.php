@@ -184,7 +184,6 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $attachment, $
     return $attr;
 }, 10, 3);
 
-
 //widgets funtions
 function gs_dashboard_quick_links_widget() {
     wp_add_dashboard_widget(

@@ -111,3 +111,28 @@ body{
         border-radius: 1.25rem;
     }
 }
+
+.with-padding-60 {
+    padding: 3.75rem 0; 
+}
+
+.with-padding-80 {
+    padding: 5rem 0; 
+}
+
+.with-padding-100 {
+    padding: 6.25rem 0;
+}
+
+
+.with-margin-60 {
+    margin: 3.75rem 0;
+}
+
+.with-margin-80 {
+    margin: 5rem 0;
+}
+
+.with-margin-100 {
+    margin: 6.25rem 0;
+}
