@@ -219,25 +219,12 @@ function gs_render_quick_links() {
 }
 
 function gs_remove_default_dashboard_widgets() {
-    // Activity
     remove_meta_box('dashboard_activity', 'dashboard', 'normal');
-
-    // Quick Draft
     remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
-
-    // Site Health
     remove_meta_box('dashboard_site_health', 'dashboard', 'normal');
-
-    // At a Glance / Right Now
     remove_meta_box('dashboard_right_now', 'dashboard', 'normal');
-
-    // WordPress Events and News
     remove_meta_box('dashboard_primary', 'dashboard', 'side');
-
-    // Incoming Links (antigão, quase ninguém usa)
     remove_meta_box('dashboard_incoming_links', 'dashboard', 'normal');
-
-    // Plugins
     // remove_meta_box('dashboard_plugins', 'dashboard', 'normal');
 }
 add_action('wp_dashboard_setup', 'gs_remove_default_dashboard_widgets', 20);
