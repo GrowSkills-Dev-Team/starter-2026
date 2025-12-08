@@ -2,6 +2,7 @@
 define('THEME_PATH', get_template_directory());
 define('THEME_URI', get_template_directory_uri());
 
+require_once('includes/clean-up.php');
 require_once('includes/default-settings.php');
 require_once('includes/post-types.php');
 require_once('includes/image-optim.php');
@@ -219,25 +220,12 @@ function gs_render_quick_links() {
 }
 
 function gs_remove_default_dashboard_widgets() {
-    // Activity
     remove_meta_box('dashboard_activity', 'dashboard', 'normal');
-
-    // Quick Draft
     remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
-
-    // Site Health
     remove_meta_box('dashboard_site_health', 'dashboard', 'normal');
-
-    // At a Glance / Right Now
     remove_meta_box('dashboard_right_now', 'dashboard', 'normal');
-
-    // WordPress Events and News
     remove_meta_box('dashboard_primary', 'dashboard', 'side');
-
-    // Incoming Links (antigão, quase ninguém usa)
     remove_meta_box('dashboard_incoming_links', 'dashboard', 'normal');
-
-    // Plugins
     // remove_meta_box('dashboard_plugins', 'dashboard', 'normal');
 }
 add_action('wp_dashboard_setup', 'gs_remove_default_dashboard_widgets', 20);
