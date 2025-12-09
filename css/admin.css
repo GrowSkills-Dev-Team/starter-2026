@@ -12,3 +12,8 @@
         }
     }
 }
+
+/* show wich fields are inline editable */
+*[contenteditable="true"]{
+    border: 0.0625rem dashed lightgray;
+}

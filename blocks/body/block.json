@@ -10,7 +10,8 @@
         "mode": "auto",
         "renderTemplate": "render.php",
         "postTypes": [],
-        "blockVersion": 3
+        "blockVersion": 3,
+        "autoInlineEditing": true
   },
   "supports": {
       "align": false

@@ -2,6 +2,8 @@
 $choose = get_field('choose_overview');
 $overview_title = get_field('title');
 $posts_per_page = 6;
+$name_spacing = 'margin';
+$spacing = get_field('spacing');
 
 if ($choose) :
     $args = array(
@@ -13,7 +15,7 @@ if ($choose) :
     $items = $query->posts;
 
     if ($items) : ?>
-        <section class="overview overview-<?= $choose; ?> with-padding">
+        <section class="overview overview-<?= $choose; ?><?= ($spacing === 'none' ? ' no-' . $name_spacing : ' with-' . $name_spacing); ?><?= ($spacing ? ' with-' . $name_spacing . '-' . $spacing : ''); ?>">
             <div class="wrapper">
                 <?php if($overview_title) : ?>
                     <div class="overview-text text-container">

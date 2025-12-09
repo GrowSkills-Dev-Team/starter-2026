@@ -1,5 +1,8 @@
 :root {
     color-scheme: dark light;
+    --spacing-mobile: 3rem;
+    --spacing-tablet: 4rem;
+    --spacing-desktop: 6.25rem;
 }
 
 [hidden] {
@@ -81,24 +84,24 @@ body{
 }
 
 .with-margin {
-    margin: 3rem 0;
+    margin: var(--spacing-mobile) 0;
 
-    @media (min-width: 80rem) {
-        margin: 4rem 0;
+    @media (min-width: 48rem) {
+        margin: var(--spacing-tablet) 0;
     }
-    @media (min-width: 90rem) {
-        margin: 6.25rem 0;
+    @media (min-width: 60rem) {
+        margin: var(--spacing-desktop) 0;
     }
 }
 
 .with-padding {
-    padding: 3rem 0;
+    padding: var(--spacing-mobile) 0;
 
-    @media (min-width: 80rem) {
-        padding: 4rem 0;
+    @media (min-width: 48rem) {
+        padding: var(--spacing-tablet) 0;
     }
-    @media (min-width: 90rem) {
-        padding: 6.25rem 0;
+    @media (min-width: 60rem) {
+        padding: var(--spacing-desktop) 0;
     }
 }
 
@@ -112,27 +115,33 @@ body{
     }
 }
 
-.with-padding-60 {
-    padding: 3.75rem 0; 
+
+.with-margin-medium, .with-padding-medium {
+    margin: calc(var(--spacing-mobile) * 0.5) 0;
+
+    @media (min-width: 48rem) {
+        margin: calc(var(--spacing-tablet) * 0.5) 0;
+    }
+    @media (min-width: 60rem) {
+        margin: calc(var(--spacing-desktop) * 0.5) 0;
+    }
 }
 
-.with-padding-80 {
-    padding: 5rem 0; 
+.with-margin-small, .with-padding-small {
+    margin: calc(var(--spacing-mobile) * 0.25) 0;
+
+    @media (min-width: 48rem) {
+        margin: calc(var(--spacing-tablet) * 0.25) 0;
+    }
+    @media (min-width: 60rem) {
+        margin: calc(var(--spacing-desktop) * 0.25) 0;
+    }
 }
 
-.with-padding-100 {
-    padding: 6.25rem 0;
+.no-margin {
+    margin: 0;
 }
 
-
-.with-margin-60 {
-    margin: 3.75rem 0;
-}
-
-.with-margin-80 {
-    margin: 5rem 0;
-}
-
-.with-margin-100 {
-    margin: 6.25rem 0;
+.no-padding {
+    padding: 0;
 }

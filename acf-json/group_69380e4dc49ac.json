@@ -1,0 +1,64 @@
+{
+    "key": "group_69380e4dc49ac",
+    "title": "Spacing",
+    "fields": [
+        {
+            "key": "field_69380e4ddc637",
+            "label": "Spacing",
+            "name": "spacing",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "full": "Full",
+                "medium": "Medium",
+                "small": "Small",
+                "none": "None"
+            },
+            "default_value": "full",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "allow_in_bindings": 0,
+            "layout": "vertical",
+            "save_other_choice": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "all"
+            },
+            {
+                "param": "block",
+                "operator": "!=",
+                "value": "acf\/headerimage"
+            },
+            {
+                "param": "block",
+                "operator": "!=",
+                "value": "acf\/hero"
+            }
+        ]
+    ],
+    "menu_order": -100,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1765282006
+}

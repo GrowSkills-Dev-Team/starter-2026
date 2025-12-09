@@ -12,7 +12,8 @@
   "acf": {
     "blockVersion": 3,
     "mode": "preview",
-    "renderTemplate": "render.php"
+    "renderTemplate": "render.php",
+    "autoInlineEditing": true
   },
   "align": "full"
 }

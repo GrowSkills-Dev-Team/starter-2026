@@ -5,7 +5,7 @@ $align_image = get_field('align_image');
 if($header_image) : ?>
     <section class="header-image<?= ($align_image ? ' align-image-' . $align_image : ''); ?>">
         <div class="header-image-image cover-image">
-            <?= theme_image($header_image, 'hero', ''); ?>
+            <img src="<?= $header_image; ?>" <?= theme_image_attrs($header_image, 'hero', ''); ?> />
         </div>
     </section>
 <?php endif;
