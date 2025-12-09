@@ -16,7 +16,7 @@
                 "class": "",
                 "id": ""
             },
-            "return_format": "id",
+            "return_format": "url",
             "library": "all",
             "min_width": "",
             "min_height": "",
@@ -133,5 +133,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1759914275
+    "display_title": "",
+    "modified": 1765282528
 }

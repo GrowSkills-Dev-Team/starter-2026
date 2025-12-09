@@ -14,7 +14,8 @@
         "blockVersion": 3,
         "mode": "preview",
         "renderTemplate": "render.php",
-        "postTypes": []
+        "postTypes": [],
+        "autoInlineEditing": true
     },
     "render_callback": "my_acf_block_render_callback",
     "align": "full"

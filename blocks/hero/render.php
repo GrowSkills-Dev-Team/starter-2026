@@ -11,7 +11,7 @@ if (!empty($image) && !empty($title)) :
 
 <section class="hero with-shape">
     <div class="hero-image cover-image" style="--valign: <?php echo esc_attr($align_image ?: '50%'); ?>;">
-        <?= theme_image($image, 'hero', 'hero-image'); ?>
+        <img src="<?= $image; ?>" <?= theme_image_attrs($image, 'hero', 'hero-image'); ?> />
     </div>
     <div class="wrapper">
         <div class="hero-text">

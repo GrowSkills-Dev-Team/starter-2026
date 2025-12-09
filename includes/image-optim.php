@@ -1,5 +1,4 @@
 <?php
-
 add_filter('intermediate_image_sizes', function($sizes) {
     return array_diff($sizes, [
         'thumbnail',
@@ -68,9 +67,22 @@ add_filter('wp_editor_set_quality', function($quality) {
     return 80;
 });
 
-function theme_image($image_id, $context = 'content', $class = '') {
+function theme_image($image_id_or_url, $context = 'content', $class = '') {
 
-    if (!$image_id) return '';
+    if (!$image_id_or_url) return '';
+    
+    // Support voor ACF inline editor: als er een URL wordt doorgegeven, converteer naar ID
+    $image_id = $image_id_or_url;
+    if (is_string($image_id_or_url) && filter_var($image_id_or_url, FILTER_VALIDATE_URL)) {
+        $image_id = attachment_url_to_postid($image_id_or_url);
+        
+        // Als attachment_url_to_postid() geen ID vindt, probeer dan de originele URL te gebruiken
+        if (!$image_id) {
+            // Fallback: render een simpele img tag met de URL
+            $class_attr = $class ? ' class="' . esc_attr($class) . '"' : '';
+            return '<img src="' . esc_url($image_id_or_url) . '"' . $class_attr . ' decoding="async" loading="lazy" />';
+        }
+    }
     
     $attr = [
         'class'    => $class,
@@ -83,29 +95,104 @@ function theme_image($image_id, $context = 'content', $class = '') {
             $size  = 'hero-xl';
             $attr['loading']        = 'eager';
             $attr['fetchpriority']  = 'high';
-            $attr['sizes'] = '(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 2200px';
+            $attr['sizes'] = '(max-width: 48rem) 100vw, (max-width: 80rem) 90vw, 137.5rem';
             break;
 
         case 'medium':
             $size = 'content-m';
             $attr['loading'] = 'lazy';
-            $attr['sizes'] = '(max-width: 768px) 100vw, 50vw';
+            $attr['sizes'] = '(max-width: 48rem) 100vw, 50vw';
             break;
 
         case 'small':
             $size = 'content-s';
             $attr['loading'] = 'lazy';
-            $attr['sizes'] = '(max-width: 768px) 50vw, 33vw';
+            $attr['sizes'] = '(max-width: 48rem) 50vw, 33vw';
             break;
 
         default:
             $size = 'content-l';
             $attr['loading'] = 'lazy';
-            $attr['sizes'] = '(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1250px';
+            $attr['sizes'] = '(max-width: 48rem) 100vw, (max-width: 80rem) 90vw, 78.125rem';
             break;
     }
 
     return wp_get_attachment_image($image_id, $size, false, $attr);
+}
+
+/**
+ * Genereer geoptimaliseerde image attributen voor ACF inline editor
+ * Gebruik: <img src="<?= $image; ?>" <?= theme_image_attrs($image, 'content', 'my-class'); ?> />
+ * 
+ * Dit behoudt de originele <img> tag waar ACF zijn data-attributen aan toevoegt,
+ * maar voegt wel srcset, sizes, alt, width, height etc. toe voor optimalisatie.
+ */
+function theme_image_attrs($image_id_or_url, $context = 'content', $class = '') {
+    
+    if (!$image_id_or_url) return '';
+    
+    // Converteer URL naar ID indien nodig
+    $image_id = $image_id_or_url;
+    if (is_string($image_id_or_url) && filter_var($image_id_or_url, FILTER_VALIDATE_URL)) {
+        $image_id = attachment_url_to_postid($image_id_or_url);
+        if (!$image_id) {
+            // Geen ID gevonden, return alleen basis attributen
+            $attrs = 'decoding="async" loading="lazy"';
+            if ($class) $attrs .= ' class="' . esc_attr($class) . '"';
+            return $attrs;
+        }
+    }
+    
+    // Bepaal size en attrs op basis van context
+    switch ($context) {
+        case 'hero':
+            $size = 'hero-xl';
+            $loading = 'eager';
+            $fetchpriority = 'high';
+            $sizes = '(max-width: 48rem) 100vw, (max-width: 80rem) 90vw, 137.5rem';
+            break;
+        case 'medium':
+            $size = 'content-m';
+            $loading = 'lazy';
+            $fetchpriority = null;
+            $sizes = '(max-width: 48rem) 100vw, 50vw';
+            break;
+        case 'small':
+            $size = 'content-s';
+            $loading = 'lazy';
+            $fetchpriority = null;
+            $sizes = '(max-width: 48rem) 50vw, 33vw';
+            break;
+        default:
+            $size = 'content-l';
+            $loading = 'lazy';
+            $fetchpriority = null;
+            $sizes = '(max-width: 48rem) 100vw, (max-width: 80rem) 90vw, 78.125rem';
+            break;
+    }
+    
+    // Haal srcset op
+    $srcset = wp_get_attachment_image_srcset($image_id, $size);
+    $image_meta = wp_get_attachment_metadata($image_id);
+    $alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+    
+    // Bouw attributen string
+    $attrs = [];
+    if ($srcset) $attrs[] = 'srcset="' . esc_attr($srcset) . '"';
+    if ($sizes) $attrs[] = 'sizes="' . esc_attr($sizes) . '"';
+    if ($alt) $attrs[] = 'alt="' . esc_attr($alt) . '"';
+    if ($class) $attrs[] = 'class="' . esc_attr($class) . '"';
+    $attrs[] = 'decoding="async"';
+    $attrs[] = 'loading="' . esc_attr($loading) . '"';
+    if ($fetchpriority) $attrs[] = 'fetchpriority="' . esc_attr($fetchpriority) . '"';
+    
+    // Voeg width en height toe voor betere CLS (Cumulative Layout Shift)
+    if ($image_meta && isset($image_meta['width']) && isset($image_meta['height'])) {
+        $attrs[] = 'width="' . esc_attr($image_meta['width']) . '"';
+        $attrs[] = 'height="' . esc_attr($image_meta['height']) . '"';
+    }
+    
+    return implode(' ', $attrs);
 }
 
 /**
@@ -146,7 +233,7 @@ add_action('after_setup_theme', function () {
     // 5) Pas sizes="" in admin aan zodat layout klopt
     add_filter('wp_calculate_image_sizes', function ($sizes, $size, $image_src, $attachment_id) {
         if (is_admin()) {
-            return '(max-width: 768px) 100vw, 50vw';
+            return '(max-width: 48rem) 100vw, 50vw';
         }
         return $sizes;
     }, 10, 4);

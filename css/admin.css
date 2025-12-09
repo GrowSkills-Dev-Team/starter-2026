@@ -4,11 +4,16 @@
 
 .block-editor-iframe__html{
     section:not(.header-image){
-        margin: 0!important;
-        padding: 6.25rem 0!important;
+        /* margin: 0!important; */
+        /* padding: 6.25rem 0!important; */
 
         a{
             pointer-events: none;
         }
     }
+}
+
+/* show wich fields are inline editable */
+*[contenteditable="true"]{
+    border: 0.0625rem dashed lightgray;
 }
