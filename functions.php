@@ -229,3 +229,24 @@ function gs_remove_default_dashboard_widgets() {
     // remove_meta_box('dashboard_plugins', 'dashboard', 'normal');
 }
 add_action('wp_dashboard_setup', 'gs_remove_default_dashboard_widgets', 20);
+
+
+//block editor scripts
+add_action('enqueue_block_editor_assets', function () {
+
+    // wp_enqueue_script(
+    //     'splide-editor',
+    //     THEME_URI . '/js/vendor/splide.js',
+    //     [],
+    //     filemtime(THEME_PATH . '/js/vendor/splide.js'),
+    //     true
+    // );
+
+    wp_enqueue_script(
+        'theme-editor-script',
+        THEME_URI . '/js/script.js',
+        ['splide-editor'],
+        filemtime(THEME_PATH . '/js/script.js'),
+        true
+    );
+});
