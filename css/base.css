@@ -116,7 +116,7 @@ body{
 }
 
 
-.with-margin-medium, .with-padding-medium {
+.with-margin-medium{
     margin: calc(var(--spacing-mobile) * 0.5) 0;
 
     @media (min-width: 48rem) {
@@ -127,7 +127,18 @@ body{
     }
 }
 
-.with-margin-small, .with-padding-small {
+.with-padding-medium {
+    padding: calc(var(--spacing-mobile) * 0.5) 0;
+
+    @media (min-width: 48rem) {
+        padding: calc(var(--spacing-tablet) * 0.5) 0;
+    }
+    @media (min-width: 60rem) {
+        padding: calc(var(--spacing-desktop) * 0.5) 0;
+    }
+}
+
+.with-margin-small{
     margin: calc(var(--spacing-mobile) * 0.25) 0;
 
     @media (min-width: 48rem) {
@@ -137,6 +148,18 @@ body{
         margin: calc(var(--spacing-desktop) * 0.25) 0;
     }
 }
+
+.with-padding-small {
+    padding: calc(var(--spacing-mobile) * 0.25) 0;
+
+    @media (min-width: 48rem) {
+        padding: calc(var(--spacing-tablet) * 0.25) 0;
+    }
+    @media (min-width: 60rem) {
+        padding: calc(var(--spacing-desktop) * 0.25) 0;
+    }
+}
+
 
 .no-margin {
     margin: 0;
