@@ -14,7 +14,7 @@
 
 <a class="skip-link screen-reader-text" href="#content">Direct naar inhoud</a>
 
-<div id="site-container"><?php // Style Gravity Forms more easy ?> 
+<div id="site-container" view-transition-name="page"><?php // Style Gravity Forms more easy ?> 
 
 <header role="banner">
     <div class="wrapper">
