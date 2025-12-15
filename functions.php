@@ -25,6 +25,25 @@ add_action('wp_enqueue_scripts', function () {
     // wp_localize_script('script', 'ajax', ['url' => admin_url('admin-ajax.php')]);
 });
 
+// Verwijder WordPress default block editor styles met hogere priority
+add_action('enqueue_block_editor_assets', function () {
+    wp_dequeue_style('wp-block-library');
+    wp_dequeue_style('wp-block-library-theme');
+    wp_dequeue_style('wp-reset-editor-styles');
+    wp_dequeue_style('wp-block-editor-content');
+    wp_dequeue_style('wp-edit-blocks');
+}, 100);
+
+add_action('enqueue_block_editor_assets', function () {
+    wp_enqueue_style('editor-stylesheet', get_stylesheet_uri(), [], filemtime(THEME_PATH . '/style.css'));
+});
+
+// Verwijder inline editor styles die WordPress toevoegt
+add_filter('block_editor_settings_all', function($settings) {
+    $settings['styles'] = [];
+    return $settings;
+}, 10, 1);
+
 add_action('admin_menu', function () {
     remove_menu_page('edit.php');
 });
@@ -202,15 +221,15 @@ function gs_render_quick_links() {
         'objects'
     );
 
-    echo '<div style="padding:10px;">';
+    echo '<div style="padding:0.625rem;">';
 
-    echo '<p><a href="' . admin_url('post-new.php?post_type=page') . '" class="button button-primary" style="margin-bottom:6px;">Create New Page</a></p>';
+    echo '<p><a href="' . admin_url('post-new.php?post_type=page') . '" class="button button-primary" style="margin-bottom:0.375rem;">Create New Page</a></p>';
 
-    echo '<p><a href="' . admin_url('post-new.php') . '" class="button" style="margin-bottom:6px;">Create New Post</a></p>';
+    echo '<p><a href="' . admin_url('post-new.php') . '" class="button" style="margin-bottom:0.375rem;">Create New Post</a></p>';
 
     if (!empty($post_types)) {
         foreach ($post_types as $pt) {
-            echo '<p><a href="' . admin_url('post-new.php?post_type=' . $pt->name) . '" class="button" style="margin-bottom:6px;">Add New ' . $pt->labels->singular_name . '</a></p>';
+            echo '<p><a href="' . admin_url('post-new.php?post_type=' . $pt->name) . '" class="button" style="margin-bottom:0.375rem;">Add New ' . $pt->labels->singular_name . '</a></p>';
         }
     } else {
         echo '<p>No custom post types found.</p>';

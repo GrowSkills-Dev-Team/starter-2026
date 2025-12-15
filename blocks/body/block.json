@@ -4,7 +4,6 @@
   "description": "Een blok voor bodytekst.",
   "category": "text",
   "icon": "editor-alignleft",
-  "editorStyle": [ "file:../../style.css" ],
   "keywords": ["tekst", "body", "content"],
   "acf": {
     "blockVersion": 3,

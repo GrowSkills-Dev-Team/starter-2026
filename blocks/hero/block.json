@@ -4,7 +4,6 @@
     "description": "A custom block.",
     "style": [ "" ],
     "category": "formatting",
-    "editorStyle": [ "file:../../style.css" ],
     "icon": "admin-comments",
     "keywords": ["cta", "text"],
     "supports": {
