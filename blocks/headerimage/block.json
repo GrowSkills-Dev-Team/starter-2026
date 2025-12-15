@@ -11,9 +11,10 @@
   },
   "acf": {
     "blockVersion": 3,
-    "mode": "preview",
+    "mode": "auto",
     "renderTemplate": "render.php",
-    "autoInlineEditing": true
+    "postTypes": [],
+    "hideFieldsInSidebar": true
   },
   "align": "full"
 }
