@@ -7,10 +7,11 @@
   "editorStyle": [ "file:../../style.css" ],
   "keywords": ["tekst", "body", "content"],
   "acf": {
-        "mode": "auto",
-        "renderTemplate": "render.php",
-        "postTypes": [],
-        "blockVersion": 3
+    "blockVersion": 3,
+    "mode": "auto",
+    "renderTemplate": "render.php",
+    "postTypes": [],
+    "hideFieldsInSidebar": true
   },
   "supports": {
       "align": false

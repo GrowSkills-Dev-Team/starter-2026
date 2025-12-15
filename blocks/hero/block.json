@@ -12,9 +12,10 @@
     },
     "acf": {
         "blockVersion": 3,
-        "mode": "preview",
+        "mode": "auto",
         "renderTemplate": "render.php",
-        "postTypes": []
+        "postTypes": [],
+        "hideFieldsInSidebar": true
     },
     "render_callback": "my_acf_block_render_callback",
     "align": "full"
