@@ -15,11 +15,11 @@ if ($choose) :
     $items = $query->posts;
 
     if ($items) : ?>
-        <section class="overview overview-<?= $choose; ?><?= ($spacing === 'none' ? ' no-' . $name_spacing : ' with-' . $name_spacing); ?><?= ($spacing ? ' with-' . $name_spacing . '-' . $spacing : ''); ?>">
+        <section class="overview overview-<?= esc_attr($choose); ?><?= ($spacing === 'none' ? ' no-' . esc_attr($name_spacing) : ' with-' . esc_attr($name_spacing)); ?><?= ($spacing ? ' with-' . esc_attr($name_spacing) . '-' . esc_attr($spacing) : ''); ?>">
             <div class="wrapper">
                 <?php if($overview_title) : ?>
                     <div class="overview-text text-container">
-                        <h2><?= $overview_title; ?></h2>
+                        <h2><?= esc_html($overview_title); ?></h2>
                     </div>
                 <?php endif; ?>
                 <div class="overview-items ajax-container">
