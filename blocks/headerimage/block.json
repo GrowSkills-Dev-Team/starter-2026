@@ -5,7 +5,6 @@
   "category": "formatting",
   "icon": "admin-comments",
   "keywords": ["cta", "text"],
-  "editorStyle": [ "file:../../style.css" ],
   "supports": {
       "align": false
   },

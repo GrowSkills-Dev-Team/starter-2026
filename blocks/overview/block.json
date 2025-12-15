@@ -5,7 +5,6 @@
     "style": [ "" ],
     "category": "formatting",
     "icon": "admin-comments",
-    "editorStyle": [ "file:../../style.css" ],
     "keywords": ["overview", "text"],
     "supports": {
         "align": false
