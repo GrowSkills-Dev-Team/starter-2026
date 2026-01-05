@@ -17,32 +17,69 @@ add_action('after_setup_theme', function () {
 
 add_filter('show_admin_bar', '__return_false');
 
+/**
+ * FRONTEND: load compiled CSS + your JS
+ * - Replaces get_stylesheet_uri() (style.css) enqueue
+ * - Stops relying on @import in style.css
+ */
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_script( 'wp-a11y' );
+    // If you truly need wp-a11y on the frontend, keep it.
+    // Otherwise you can remove this line.
+    wp_enqueue_script('wp-a11y');
+
+    // Optional: keep this if you want to strip core block styles on the frontend.
     wp_dequeue_style('wp-block-library');
-    wp_enqueue_style('stylesheet', get_stylesheet_uri(), [], filemtime(THEME_PATH . '/style.css'));
-    wp_enqueue_script('script', THEME_URI . '/js/script.js', [], filemtime(THEME_PATH . '/js/script.js'), true);
+
+    // Compiled frontend CSS
+    $css_path = THEME_PATH . '/assets/build/front-end.css';
+    $css_uri  = THEME_URI . '/assets/build/front-end.css';
+    if (file_exists($css_path)) {
+        wp_enqueue_style('gs-frontend', $css_uri, [], filemtime($css_path));
+    }
+
+    // Theme JS
+    $js_path = THEME_PATH . '/js/script.js';
+    $js_uri  = THEME_URI . '/js/script.js';
+    if (file_exists($js_path)) {
+        wp_enqueue_script('script', $js_uri, [], filemtime($js_path), true);
+    }
+
     // wp_localize_script('script', 'ajax', ['url' => admin_url('admin-ajax.php')]);
 });
 
-// Verwijder WordPress default block editor styles met hogere priority
+/**
+ * EDITOR: remove WP editor CSS (your choice) + load compiled editor CSS
+ * - Replaces get_stylesheet_uri() (style.css) editor enqueue
+ */
 add_action('enqueue_block_editor_assets', function () {
+    // Keep/remove these based on how aggressive you want the reset to be.
+    // Start with these three (usually safe):
     wp_dequeue_style('wp-block-library');
     wp_dequeue_style('wp-block-library-theme');
     wp_dequeue_style('wp-reset-editor-styles');
-    wp_dequeue_style('wp-block-editor-content');
-    wp_dequeue_style('wp-edit-blocks');
+
+    // These are more aggressive; only keep if you really want to strip editor layout CSS:
+    // wp_dequeue_style('wp-block-editor-content');
+    // wp_dequeue_style('wp-edit-blocks');
+
+    // Compiled editor CSS
+    $editor_css_path = THEME_PATH . '/assets/build/editor-gs.css';
+    $editor_css_uri  = THEME_URI . '/assets/build/editor-gs.css';
+    if (file_exists($editor_css_path)) {
+        wp_enqueue_style('gs-editor', $editor_css_uri, [], filemtime($editor_css_path));
+    }
 }, 100);
 
-add_action('enqueue_block_editor_assets', function () {
-    wp_enqueue_style('editor-stylesheet', get_stylesheet_uri(), [], filemtime(THEME_PATH . '/style.css'));
-});
-
-// Verwijder inline editor styles die WordPress toevoegt
-add_filter('block_editor_settings_all', function($settings) {
-    $settings['styles'] = [];
-    return $settings;
-}, 10, 1);
+/**
+ * IMPORTANT:
+ * This filter nukes ALL editor-injected styles, including styles WP uses for editor UI/blocks.
+ * If you rely on full-site preview, this can create side effects.
+ * I recommend removing it unless you have a very specific reason.
+ */
+// add_filter('block_editor_settings_all', function($settings) {
+//     $settings['styles'] = [];
+//     return $settings;
+// }, 10, 1);
 
 add_action('admin_menu', function () {
     remove_menu_page('edit.php');
@@ -169,7 +206,7 @@ add_action('init', function () {
     }
 });
 
-//image alt
+// image alt
 add_filter('wp_get_attachment_image_attributes', function ($attr, $attachment, $size) {
     if (!empty($attr['alt'])) {
         return $attr;
@@ -204,7 +241,7 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $attachment, $
     return $attr;
 }, 10, 3);
 
-//widgets funtions
+// widgets functions
 function gs_dashboard_quick_links_widget() {
     wp_add_dashboard_widget(
         'gs_quick_links',
@@ -249,23 +286,34 @@ function gs_remove_default_dashboard_widgets() {
 }
 add_action('wp_dashboard_setup', 'gs_remove_default_dashboard_widgets', 20);
 
-
-//block editor scripts
+/**
+ * BLOCK EDITOR SCRIPTS
+ * - Fix: do not depend on 'splide-editor' unless you actually enqueue it.
+ */
 add_action('enqueue_block_editor_assets', function () {
 
-    // wp_enqueue_script(
-    //     'splide-editor',
-    //     THEME_URI . '/js/vendor/splide.js',
-    //     [],
-    //     filemtime(THEME_PATH . '/js/vendor/splide.js'),
-    //     true
-    // );
+    // If you need Splide in the editor, uncomment BOTH this and the dependency below.
+    /*
+    $splide_path = THEME_PATH . '/js/vendor/splide.js';
+    if (file_exists($splide_path)) {
+        wp_enqueue_script(
+            'splide-editor',
+            THEME_URI . '/js/vendor/splide.js',
+            [],
+            filemtime($splide_path),
+            true
+        );
+    }
+    */
 
-    wp_enqueue_script(
-        'theme-editor-script',
-        THEME_URI . '/js/script.js',
-        ['splide-editor'],
-        filemtime(THEME_PATH . '/js/script.js'),
-        true
-    );
+    $js_path = THEME_PATH . '/js/script.js';
+    if (file_exists($js_path)) {
+        wp_enqueue_script(
+            'theme-editor-script',
+            THEME_URI . '/js/script.js',
+            [], // add 'splide-editor' here ONLY if you enqueue it above
+            filemtime($js_path),
+            true
+        );
+    }
 });

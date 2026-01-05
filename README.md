@@ -24,124 +24,73 @@ blocks/
 │   ├── block.json
 │   ├── render.php
 │   └── preview.jpg
-├── headerimage/
-│   ├── block.json
-│   ├── render.php
-│   └── preview.jpg
-└── overview/
-    ├── block.json
-    ├── render.php
-    └── preview.jpg
+ # Starter 2026 Theme (GS custom Theme)
+
+A custom WordPress theme built with ACF (Advanced Custom Fields) blocks.
+
+Version: 2.0.0 — Theme name and version are defined in `style.css`.
+
+**Quick overview**
+- Blocks are stored in the `blocks/` folder and are auto-registered in `functions.php`.
+- Source CSS files live in the `css/` folder and are compiled to `assets/build/`.
+- Use the included npm scripts to build or watch CSS.
+
+## Developer / Build Instructions
+
+Prerequisites:
+- Node.js and npm (or npx available).
+
+Install dependencies (run once):
+```bash
+npm install
 ```
 
-### How It Works
-
-#### 1. Block Registration
-
-Blocks are automatically registered in `functions.php` using the following code:
-
-```php
-add_action('init', function () {
-    $blocks_dir = get_template_directory() . '/blocks/';
-    foreach (glob($blocks_dir . '*', GLOB_ONLYDIR) as $block_folder) {
-        $block_json = $block_folder . '/block.json';
-        if (file_exists($block_json)) {
-            register_block_type($block_folder);
-        }
-    }
-});
+Build the compiled CSS files (production):
+```bash
+npm run build:css
 ```
 
-This means any new block added to the `blocks/` folder will be automatically registered - no manual registration required!
-
-#### 2. Block Configuration (`block.json`)
-
-Each `block.json` file defines the block's properties:
-
-- **name**: Block identifier (e.g., `acf/body`)
-- **title**: Display name in the block inserter
-- **description**: Brief explanation of the block's purpose
-- **category**: Where the block appears in the inserter (text, media, design, etc.)
-- **icon**: Dashicon identifier for the block
-- **acf.renderTemplate**: Path to the PHP template file
-- **supports**: Block features (alignment, etc.)
-- **example**: Preview configuration with sample data
-
-Example:
-```json
-{
-  "name": "acf/body",
-  "title": "Body",
-  "description": "A block for body text.",
-  "category": "text",
-  "icon": "editor-alignleft",
-  "acf": {
-    "blockVersion": 3,
-    "mode": "auto",
-    "renderTemplate": "render.php"
-  }
-}
+Watch CSS files for changes (development):
+```bash
+npm run watch:css
 ```
 
-#### 3. Block Rendering (`render.php`)
+What the scripts do:
+- `build:css` runs PostCSS on `css/frontend.css` and `css/editor.css` and outputs:
+    - `assets/build/front-end.css`
+    - `assets/build/editor-gs.css`
+- `watch:css` runs the same commands in watch mode.
 
-The `render.php` file contains the HTML output for the block. It uses ACF's `get_field()` function to retrieve field values:
+Where to edit CSS:
+- Edit the source CSS files in the `css/` folder. The theme contains a set of partials and sheets (e.g. `root.css`, `base.css`, `frontend.css`, `editor.css`, `header.css`, `footer.css`, `content.css`, etc.). After editing, run the build script to regenerate the compiled files.
 
-```php
-<?php
-$image = get_field('image');
-$title = get_field('title');
-$text = get_field('text');
+Enqueueing:
+- `functions.php` checks for the compiled files and enqueues `assets/build/front-end.css` on the frontend and `assets/build/editor-gs.css` in the block editor. See the `wp_enqueue_scripts` and `enqueue_block_editor_assets` hooks in `functions.php`.
 
-if (!empty($image) && !empty($title)) :
-?>
 
-<section class="hero">
-    <img src="<?= $image; ?>" />
-    <h1><?= $title; ?></h1>
-    <?= $text ? '<p>' . $text . '</p>' : null; ?>
-</section>
+## Blocks (ACF)
+Blocks are auto-registered by the `init` action in `functions.php`. Add a new block folder and it will be available automatically.
 
-<?php endif;
-```
+## Files of interest
+- `style.css` — theme header (name, version)
+- `theme.json` — WP theme settings
+- `functions.php` — theme setup, enqueues, block registration
+- `css/` — source CSS files (compile these)
+- `assets/build/` — compiled CSS output (committed or generated)
+- `js/` — theme scripts (optional)
 
-#### 4. Block Preview (`preview.jpg`)
+## Notes & Best Practices
+- Keep the source CSS in `css/` and avoid editing the compiled files in `assets/build/` directly.
+- Use `npm run watch:css` during development for instant rebuilds.
+- Validate and sanitize ACF field output in `render.php` using escaping functions.
+- If you want a global `.gitignore` instead of committing `node_modules`, add one at the repo root or tweak the theme `.gitignore` added to this theme.
 
-Each block includes a `preview.jpg` image that shows a visual representation of the block in the block inserter. This helps content editors quickly identify the right block to use.
+## Adding/Updating Content
+- Configure ACF field groups via the WP admin (Tools → ACF Field Groups) and ensure field names match those used in `render.php` templates.
 
-### Creating a New Block
+## Available Blocks
+- Body, Hero, CTA, Header Image, Overview (see `blocks/` for details)
 
-To create a new block:
+---
 
-1. Create a new folder in `blocks/` with your block name (e.g., `blocks/testimonial/`)
-2. Add a `block.json` file with your block configuration
-3. Create a `render.php` file with your block's HTML template
-4. Add a `preview.jpg` image showing what the block looks like
-5. Configure the ACF fields in the WordPress admin (Tools → ACF Field Groups)
-
-The block will be automatically registered and available in the WordPress block editor!
-
-### Available Blocks
-
-- **Body**: Standard body text block
-- **Hero**: Large hero section with image, title, text, and button
-- **CTA**: Call-to-action block
-- **Header Image**: Header image block
-- **Overview**: Overview/listing block
-
-### ACF Field Configuration
-
-Block fields are configured separately in the WordPress admin under:
-- **Tools → ACF Field Groups**
-
-Each field group should be set to display for its corresponding ACF block location.
-
-### Best Practices
-
-- Always validate field data before outputting (check if fields are not empty)
-- Use proper escaping functions (`esc_attr()`, `esc_html()`, etc.)
-- Keep render templates clean and focused
-- Use consistent naming conventions
-- Add meaningful descriptions in `block.json` to help content editors
-- Include preview images that accurately represent the block
-
+For more details about block structure and examples, see the `blocks/` folder and `functions.php` registration code.

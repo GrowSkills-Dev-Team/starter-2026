@@ -6,18 +6,3 @@ Description: Custom developed theme.
 Text Domain: starter-theme
 Version: 2.0.0
 */
-
-@import url(./css/reset.css);
-@import url(./css/root.css);
-@import url(./css/base.css);
-@import url(./css/type.css);
-@import url(./css/btns.css);
-@import url(./css/menus.css);
-@import url(./css/header.css);
-@import url(./css/content.css);
-@import url(./css/footer.css);
-@import url(./css/gform.css);
-@import url(./css/search.css);
-
-/* Wordpress Admin styles */
-@import url(./css/admin.css);

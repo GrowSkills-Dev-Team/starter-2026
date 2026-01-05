@@ -1,0 +1,20 @@
+{
+  "name": "starter-2026",
+  "version": "1.0.0",
+  "description": "A custom WordPress theme built with ACF (Advanced Custom Fields) blocks.",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "npx postcss css/frontend.css -o assets/build/front-end.css && npx postcss css/editor.css -o assets/build/editor-gs.css",
+    "watch:css": "npx postcss css/frontend.css -o assets/build/front-end.css --watch & npx postcss css/editor.css -o assets/build/editor-gs.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.23",
+    "cssnano": "^7.1.2",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "postcss-import": "^16.1.1"
+  }
+}
