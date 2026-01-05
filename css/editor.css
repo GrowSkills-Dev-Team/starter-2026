@@ -1,0 +1,12 @@
+@import "./root.css";
+@import "./reset.css";
+@import "./base.css";
+@import "./type.css";
+@import "./accessibility.css";
+
+/* Editor-only resets/fixes live here */
+@import "./admin.css";
+
+/* Optional: if you want editor to match front-end layout more */
+@import "./content.css";
+@import "./btns.css";

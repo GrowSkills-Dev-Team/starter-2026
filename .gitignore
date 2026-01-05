@@ -1,0 +1,41 @@
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp/
+.pnp.js
+
+# Build outputs
+dist/
+build/
+public/
+.cache/
+.parcel-cache/
+
+# PHP/Composer
+vendor/
+composer.phar
+*.sql
+.env
+.env.*
+
+# Logs
+*.log
+error_log
+debug.log
+
+# IDEs/editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Misc
+*.zip
+*.tar.gz
+*.bak
+*.swp
