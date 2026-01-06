@@ -34,7 +34,7 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script('script', $js_uri, [], filemtime($js_path), true);
     }
 
-    // wp_localize_script('script', 'ajax', ['url' => admin_url('admin-ajax.php')]);
+    wp_localize_script('script', 'ajax', ['url' => admin_url('admin-ajax.php')]);
 });
 
 add_action('enqueue_block_editor_assets', function () {
