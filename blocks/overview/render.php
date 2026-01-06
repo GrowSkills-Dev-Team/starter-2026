@@ -1,7 +1,14 @@
 <?php
 $choose = get_field('choose_overview');
 $overview_title = get_field('title');
-$posts_per_page = 6;
+$amount = get_field('amount');
+$button = get_field('button');
+
+if($amount === 'latest'){
+    $posts_per_page = 3;
+} else{
+    $posts_per_page = 6;
+}
 
 $block_data = get_block_classes();
 
@@ -29,11 +36,19 @@ if ($choose) :
                 </div>
             </div>
 
-            <?php get_template_part('includes/overview-more', null, [
-                'query' => $query,
-                'post_type' => $choose,
-                'posts_per_page' => $posts_per_page
-            ]) ?>
+            <?php if($amount === 'latest' && $button) : ?>
+                <div class="overview-more-btn">
+                    <div class="btn-center">
+                        <a class="btn" href="<?= esc_url($button['url']); ?>"><?= esc_html($button['title']); ?></a>
+                    </div>
+                </div>
+            <?php else : ?>
+                <?php get_template_part('includes/overview-more', null, [
+                    'query' => $query,
+                    'post_type' => $choose,
+                    'posts_per_page' => $posts_per_page
+                ]) ?>
+            <?php endif; ?>
         </section>    
     <?php endif;
 endif;
