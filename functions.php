@@ -7,6 +7,7 @@ require_once('includes/default-settings.php');
 require_once('includes/post-types.php');
 require_once('includes/image-optim.php');
 require_once('includes/wcag.php');
+require_once('includes/blocks-css-classes.php');
 
 add_action('after_setup_theme', function () {
     register_nav_menus([
@@ -17,27 +18,16 @@ add_action('after_setup_theme', function () {
 
 add_filter('show_admin_bar', '__return_false');
 
-/**
- * FRONTEND: load compiled CSS + your JS
- * - Replaces get_stylesheet_uri() (style.css) enqueue
- * - Stops relying on @import in style.css
- */
 add_action('wp_enqueue_scripts', function () {
-    // If you truly need wp-a11y on the frontend, keep it.
-    // Otherwise you can remove this line.
     wp_enqueue_script('wp-a11y');
-
-    // Optional: keep this if you want to strip core block styles on the frontend.
     wp_dequeue_style('wp-block-library');
-
-    // Compiled frontend CSS
     $css_path = THEME_PATH . '/assets/build/front-end.css';
     $css_uri  = THEME_URI . '/assets/build/front-end.css';
     if (file_exists($css_path)) {
+        wp_enqueue_style('custom-font', 'https://use.typekit.net/muf0nzc.css', [], null);
         wp_enqueue_style('gs-frontend', $css_uri, [], filemtime($css_path));
     }
 
-    // Theme JS
     $js_path = THEME_PATH . '/js/script.js';
     $js_uri  = THEME_URI . '/js/script.js';
     if (file_exists($js_path)) {
@@ -47,13 +37,7 @@ add_action('wp_enqueue_scripts', function () {
     // wp_localize_script('script', 'ajax', ['url' => admin_url('admin-ajax.php')]);
 });
 
-/**
- * EDITOR: remove WP editor CSS (your choice) + load compiled editor CSS
- * - Replaces get_stylesheet_uri() (style.css) editor enqueue
- */
 add_action('enqueue_block_editor_assets', function () {
-    // Keep/remove these based on how aggressive you want the reset to be.
-    // Start with these three (usually safe):
     wp_dequeue_style('wp-block-library');
     wp_dequeue_style('wp-block-library-theme');
     wp_dequeue_style('wp-reset-editor-styles');
@@ -62,24 +46,12 @@ add_action('enqueue_block_editor_assets', function () {
     // wp_dequeue_style('wp-block-editor-content');
     // wp_dequeue_style('wp-edit-blocks');
 
-    // Compiled editor CSS
     $editor_css_path = THEME_PATH . '/assets/build/editor-gs.css';
     $editor_css_uri  = THEME_URI . '/assets/build/editor-gs.css';
     if (file_exists($editor_css_path)) {
         wp_enqueue_style('gs-editor', $editor_css_uri, [], filemtime($editor_css_path));
     }
 }, 100);
-
-/**
- * IMPORTANT:
- * This filter nukes ALL editor-injected styles, including styles WP uses for editor UI/blocks.
- * If you rely on full-site preview, this can create side effects.
- * I recommend removing it unless you have a very specific reason.
- */
-// add_filter('block_editor_settings_all', function($settings) {
-//     $settings['styles'] = [];
-//     return $settings;
-// }, 10, 1);
 
 add_action('admin_menu', function () {
     remove_menu_page('edit.php');

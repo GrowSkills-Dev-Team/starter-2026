@@ -25,9 +25,9 @@ html {
 }
 
 body{
-    background: var(--white-bg-color);
+    background: var(--secundairy-text-color);
     min-height: 100vh;
-    color: var(--primary-text-color);
+    color: var(--dark-text-color);
     &.menu-is-open {
         overflow: hidden;
     }
@@ -39,7 +39,7 @@ body{
 }
 
 #content {
-    padding-top: 6.25rem;
+    padding-top: 4.625rem;
     section:first-of-type:not(.hero) {
         margin-top: 0;
     }

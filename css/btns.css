@@ -1,27 +1,29 @@
-.btn, input[type="submit"], input[type="reset"] {
+.btn, input[type="submit"], #wpbody-content .gform_wrapper input[type="submit"], input[type="reset"] {
     transition: all 0.2s ease-in-out;
     position: relative;
+    font-family: var(--font-family-text);
     font-size: 1rem;
     font-size: 1rem;
     font-weight: 700;
     display: inline-block;
-    background: var(--black-bg-color);
-    color: var(--secundairy-text-color);
+    background: var(--button-bg-color);
+    outline: 0.0625rem solid var(--button-bg-color);
+    color: var(--button-text-color);
     padding: 0.8125rem 1.625rem;
     text-decoration: none;
     border-radius: 1.375rem;
     line-height: 1;
     overflow: hidden;
     &:hover{
-        background: var(--primary-text-color);
-        color: var(--white-bg-color);
+        background: var(--button-text-color);
+        color: var(--button-bg-color);
     }
 
     &.btn-white{
-        background-color: var(--white-bg-color);
+        background-color: var(--button-text-color);
 
         &:hover{
-            background-color: var(--primary-text-color);
+            background-color: var(--button-bg-color);
         }
     }
 }

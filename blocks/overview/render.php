@@ -2,8 +2,8 @@
 $choose = get_field('choose_overview');
 $overview_title = get_field('title');
 $posts_per_page = 6;
-$name_spacing = 'margin';
-$spacing = get_field('spacing');
+
+$block_data = get_block_classes();
 
 if ($choose) :
     $args = array(
@@ -15,7 +15,7 @@ if ($choose) :
     $items = $query->posts;
 
     if ($items) : ?>
-        <section class="overview overview-<?= esc_attr($choose); ?><?= ($spacing === 'none' ? ' no-' . esc_attr($name_spacing) : ' with-' . esc_attr($name_spacing)); ?><?= ($spacing ? ' with-' . esc_attr($name_spacing) . '-' . esc_attr($spacing) : ''); ?>">
+        <section class="overview overview<?= esc_attr($choose); ?><?= esc_attr($block_data['classes']); ?>"<?= ($block_data['bg_color']) ? ' style="' . $block_data['bg_color'] . '"' : ''; ?>>
             <div class="wrapper">
                 <?php if($overview_title) : ?>
                     <div class="overview-text text-container">

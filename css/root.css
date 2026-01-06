@@ -9,7 +9,18 @@
 :root {
     --primary-text-color: #000;
     --secundairy-text-color: #fff;
-    --black-bg-color: #000;
-    --white-bg-color: #fff;
-    --font-family-text: 'Roboto', sans-serif;
+
+    --dark-text-color: var(--primary-text-color);
+    --light-text-color: var(--secundairy-text-color);
+
+    --button-bg-color: var(--primary-text-color);
+    --button-text-color: var(--secundairy-text-color);
+    
+     --font-family-text: Bahnschrift, sans-serif;
+}
+
+.light-text{
+    --dark-text-color: var(--light-text-color);
+    --button-bg-color: var(--secundairy-text-color);
+    --button-text-color: var(--primary-text-color);
 }

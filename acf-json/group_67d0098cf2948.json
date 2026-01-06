@@ -3,6 +3,24 @@
     "title": "Block: CTA",
     "fields": [
         {
+            "key": "field_695b86b402c34",
+            "label": "Content",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
             "key": "field_67d0098d08177",
             "label": "Titel",
             "name": "title",
@@ -105,5 +123,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1765282796
+    "modified": 1767605949
 }
