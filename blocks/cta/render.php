@@ -3,11 +3,11 @@ $title = get_field('title');
 $text = get_field('text');
 $button = get_field('button');
 $image = get_field('image');
-$name_spacing = 'margin';
-$spacing = get_field('spacing');
+
+$block_data = get_block_classes();
 
 if($title || $image) : ?>
-<section class="cta<?= ($spacing === 'none' ? ' no-' . esc_attr($name_spacing) : ' with-' . esc_attr($name_spacing)); ?><?= ($spacing ? ' with-' . esc_attr($name_spacing) . '-' . esc_attr($spacing) : ''); ?>">
+<section class="cta<?= esc_attr($block_data['classes']); ?>"<?= ($block_data['bg_color']) ? ' style="' . $block_data['bg_color'] . '"' : ''; ?>>
   <div class="wrapper">
     <div class="cta-text">
       <?= ($title ? '<h3>' . esc_html($title) . '</h3>' : null); ?>

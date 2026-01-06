@@ -26,4 +26,20 @@ button.components-button{
     min-height: auto;
 }
 
+.with-padding{
+    margin: 2rem 0;
+}
+
+.wp-picker-input-wrap{
+    .wp-color-picker{
+        display: none!important;
+    }
+}
+
+.iris-picker{
+    .iris-palette{
+        width: 2.5rem!important;
+        height: 2.5rem!important;
+    }
+}
 /* add below css specific for this site admin blocks */

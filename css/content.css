@@ -77,7 +77,6 @@
 }
 
 .overview{
-  background: #F8F8F8;
   h2{
     margin-bottom: 1.5rem;
     @media screen and (min-width: 60rem) {
@@ -105,8 +104,12 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
-  background: var(--white-bg-color);
+  background: #F8F8F8;
   overflow: hidden;
+
+  .light-text &{
+    background: #595959;
+  }
   &:hover{
     .overview-item-image img{
       transform: scale(1.05);
@@ -128,7 +131,7 @@
   padding: 1.625rem 1.875rem;
   width: 100%;
   h3, p{
-    color: var(--primary-text-color);
+    color: var(--dark-text-color);
   }
   h3{
     font-size: 1.25rem;
@@ -229,7 +232,7 @@
 
 
       h1 {
-        color: var(--white-bg-color);
+        color: var(--secundairy-text-color);
         line-height: 2.5rem;
 
         @media(min-width:48rem) {

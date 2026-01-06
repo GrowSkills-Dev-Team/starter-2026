@@ -17,7 +17,7 @@
     z-index: 8;
     opacity: 0;
     min-height: 100vh;
-    background: var(--white-bg-color);
+    background: var(--secundairy-text-color);
 
     @media (min-width: 80rem) {
         display: none;
@@ -32,7 +32,7 @@
             margin: 0 auto;
             ul.sub-menu{
                 padding-bottom: 0.5rem;
-                background: var(--black-bg-color);
+                background: var(--primary-text-color);
                 li{
                     margin-bottom: 0;
                     a{
@@ -65,7 +65,7 @@
         font-size: 1.875rem;
         color: var(--secundairy-text-color);
         display: block;
-        background: var(--black-bg-color);
+        background: var(--primary-text-color);
         padding: 1.25rem;
         font-weight: 600;
         text-decoration: none;
@@ -92,7 +92,7 @@
                     width: 0.125rem;
                     border-radius: 50%;
                     height: 1.375rem;
-                    background: var(--black-bg-color);
+                    background: var(--primary-text-color);
                 }
             }
         }
@@ -112,26 +112,17 @@
             }
             &:hover{
                 > a{
-                    background: var(--black-bg-color);
+                    background: var(--primary-text-color);
                     color: var(--secundairy-text-color);
                 }
             }
             a{
                 font-size: 0.875rem;
                 text-decoration: none;
-                color: var(--primary-text-color);
+                color: var(--dark-text-color);
                 font-weight: 600;
                 padding: 0.625rem 0.9375rem;
                 border-radius: 0.625rem;
-                .menu-bg-transparent &{
-                    color: var(--white-bg-color);
-                    &:hover{
-                        color: var(--primary-text-color);
-                    }
-                }
-                .fixed & {
-                    color: var(--primary-text-color);
-                }
             }
         }
 
@@ -140,7 +131,7 @@
             position: absolute;
             top: 2.75rem;
             left: 0;
-            background: var(--white-bg-color);
+            background: var(--secundairy-text-color);
             filter: drop-shadow(0.625rem 0.625rem 0.625rem rgba(0, 0, 0, 0.1));
             border-radius: 0.625rem;
             border-top-left-radius: 0;
@@ -151,13 +142,13 @@
                 padding-bottom: 0;
                 a{
                     font-size: 0.875rem;
-                    color: var(--primary-text-color);
+                    color: var(--dark-text-color);
                     display: block;
                     padding: 0.6rem 1rem;
                     border-radius: 0;
                     line-height: 1.2;
                     &:hover{
-                        color: var(--black-bg-color);
+                        color: var(--primary-text-color);
                         background: transparent;
                         text-decoration: none;
                     }
@@ -194,9 +185,9 @@
         }
         svg{
             path{
-                fill: var(--white-bg-color);
+                fill: var(--secundairy-text-color);
                 .fixed &{
-                    fill: var(--primary-text-color);
+                    fill: var(--dark-text-color);
                 }
             }
         }

@@ -1,4 +1,4 @@
-#site-container .gform_wrapper {
+#site-container .gform_wrapper, #wpbody-content .gform_wrapper{
     .gform_footer {
       justify-content: flex-end;
     }
@@ -11,6 +11,13 @@
     form {
       position: relative;
       max-width: rem(43.75rem);
+      label{
+        font-family: var(--font-family-text);
+        color: var(--primary-text-color);
+        .light-text &{
+          color: var(--light-text-color);
+        }
+      }
       input[type="text"], input[type="tel"], input[type="email"], input[type="number"], input[type="password"], textarea {
         font-size: 1rem;
         background: #F3F3F3;
@@ -33,7 +40,7 @@
         }
         &:focus{
           outline: 0;
-          border: 0.0625rem solid var(--black-bg-color);
+          border: 0.0625rem solid var(--primary-text-color);
         }
       }
       textarea{

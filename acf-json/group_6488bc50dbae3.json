@@ -1,9 +1,9 @@
 {
-    "key": "group_6488ab198a731",
-    "title": "Block: Body",
+    "key": "group_6488bc50dbae3",
+    "title": "Block: Overzicht",
     "fields": [
         {
-            "key": "field_695cb7930ba3e",
+            "key": "field_695b80d41a5dc",
             "label": "Content",
             "name": "",
             "aria-label": "",
@@ -21,31 +21,11 @@
             "selected": 0
         },
         {
-            "key": "field_6488b4fed3e89",
-            "label": "Toon titel",
-            "name": "show_title",
+            "key": "field_67d0031a8d17f",
+            "label": "Titel",
+            "name": "title",
             "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "ui": 1
-        },
-        {
-            "key": "field_6488ab19ee2b1",
-            "label": "Body",
-            "name": "body",
-            "aria-label": "",
-            "type": "wysiwyg",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -55,27 +35,44 @@
                 "id": ""
             },
             "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
-            "key": "field_693facdd7516f",
-            "label": "Button",
-            "name": "button",
+            "key": "field_6488bc50051f0",
+            "label": "Kies overzicht",
+            "name": "choose_overview",
             "aria-label": "",
-            "type": "link",
+            "type": "radio",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_67ed36dd41608",
+                        "operator": "==",
+                        "value": "overview"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "return_format": "array",
-            "allow_in_bindings": 0
+            "choices": {
+                "none": "Geen",
+                "project": "Projecten"
+            },
+            "default_value": "none",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "allow_in_bindings": 1,
+            "layout": "vertical",
+            "save_other_choice": 0
         }
     ],
     "location": [
@@ -83,7 +80,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/body"
+                "value": "acf\/overview"
             }
         ]
     ],
@@ -97,5 +94,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1767684138
+    "modified": 1767604447
 }

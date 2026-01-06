@@ -9,4 +9,5 @@
 
 /* Optional: if you want editor to match front-end layout more */
 @import "./content.css";
+@import "./gform.css";
 @import "./btns.css";
