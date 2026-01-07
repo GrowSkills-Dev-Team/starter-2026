@@ -85,12 +85,15 @@ body{
 
 .with-margin {
     margin: var(--spacing-mobile) 0;
+    scroll-margin-top: var(--spacing-mobile);
 
     @media (min-width: 48rem) {
         margin: var(--spacing-tablet) 0;
+        scroll-margin-top: var(--spacing-tablet);
     }
     @media (min-width: 60rem) {
         margin: var(--spacing-desktop) 0;
+        scroll-margin-top: var(--spacing-desktop);
     }
 }
 
