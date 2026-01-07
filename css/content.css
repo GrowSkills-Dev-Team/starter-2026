@@ -99,6 +99,7 @@
 }
 
 .overview-item{
+  transition: all 0.3s ease-in-out;
   position: relative;
   text-decoration: none;
   display: flex;
@@ -106,14 +107,19 @@
   align-items: flex-end;
   background: #F8F8F8;
   overflow: hidden;
+  transform: translateY(0);
 
   .light-text &{
     background: #595959;
   }
   &:hover{
     .overview-item-image img{
-      transform: scale(1.05);
+      scale: 1.05;
     }
+  }
+
+  @starting-style{
+    transform: translateY(1rem);
   }
 }
 
