@@ -15,8 +15,8 @@
   "supports": {
       "align": false
   },
-  "render_callback": "my_acf_block_render_callback",
   "align": "full",
+  "render_callback": "my_acf_block_render_callback",
   "example": {
     "attributes": {
         "mode": "preview",
