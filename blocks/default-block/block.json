@@ -1,0 +1,20 @@
+{
+  "name": "acf/default-block",
+  "title": "Default block",
+  "description": "Copy this to create a new blocks. Or use 'npm run new:block [block-name]' to create a new block.",
+  "category": "text",
+  "icon": "editor-alignleft",
+  "keywords": ["nieuw", "blok", "content"],
+  "acf": {
+    "blockVersion": 3,
+    "mode": "auto",
+    "renderTemplate": "render.php",
+    "postTypes": [],
+    "hideFieldsInSidebar": true
+  },
+  "supports": {
+    "align": false
+  },
+  "align": "full",
+  "render_callback": "my_acf_block_render_callback"
+}

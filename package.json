@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build:css": "npx postcss css/frontend.css -o assets/build/front-end.css && npx postcss css/editor.css -o assets/build/editor-gs.css",
-    "watch:css": "npx postcss css/frontend.css -o assets/build/front-end.css --watch & npx postcss css/editor.css -o assets/build/editor-gs.css --watch"
+    "watch:css": "npx postcss css/frontend.css -o assets/build/front-end.css --watch & npx postcss css/editor.css -o assets/build/editor-gs.css --watch",
+    "new:block": "node new-block.js"
   },
   "keywords": [],
   "author": "",
