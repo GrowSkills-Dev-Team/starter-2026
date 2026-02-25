@@ -289,3 +289,11 @@ add_action('enqueue_block_editor_assets', function () {
         );
     }
 });
+
+// change file upload slug to prevent conflicts with posts and pages
+add_filter('wp_insert_attachment_data', function ($data) {
+    if (isset($data['post_name'])) {
+        $data['post_name'] = 'media-' . $data['post_name'];
+    }
+    return $data;
+});
