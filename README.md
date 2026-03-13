@@ -83,7 +83,48 @@ Blocks are auto-registered by the `init` action in `functions.php`. Add a new bl
 - Keep the source CSS in `css/` and avoid editing the compiled files in `assets/build/` directly.
 - Use `npm run watch:css` during development for instant rebuilds.
 - Validate and sanitize ACF field output in `render.php` using escaping functions.
-- If you want a global `.gitignore` instead of committing `node_modules`, add one at the repo root or tweak the theme `.gitignore` added to this theme.
+
+## How to Update Local Repository
+
+This project uses only the `main` branch. To keep your local repository updated with the latest changes from GitHub:
+
+### Recommended Method (Using Git)
+
+1. **Check which branch you're on:**
+   ```bash
+   git branch
+   ```
+
+2. **Download and apply updates:**
+   ```bash
+   git pull origin main
+   ```
+
+3. **If there are conflicts, resolve them and then:**
+   ```bash
+   git add .
+   git commit -m "Resolved merge conflicts"
+   ```
+
+### Useful Commands
+
+- **Check current status:**
+  ```bash
+  git status
+  ```
+
+- **Check changes before applying:**
+  ```bash
+  git fetch origin
+  git log HEAD..origin/main --oneline
+  ```
+
+- **Force update (caution - may lose local changes):**
+  ```bash
+  git reset --hard origin/main
+  ```
+
+**Important:** Always backup your changes before updating, especially if you have local modifications that haven't been committed yet.
 
 ## Adding/Updating Content
 - Configure ACF field groups via the WP admin (Tools → ACF Field Groups) and ensure field names match those used in `render.php` templates.
