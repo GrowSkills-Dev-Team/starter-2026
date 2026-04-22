@@ -46,6 +46,12 @@
     box-shadow: none;
 }
 
+/* Native :focus-visible support (modern browsers) */
+*:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+}
+
 /* High contrast focus for better visibility */
 @media (prefers-contrast: high) {
     *:focus {
