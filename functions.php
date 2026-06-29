@@ -8,6 +8,7 @@ require_once('includes/post-types.php');
 require_once('includes/image-optim.php');
 require_once('includes/wcag.php');
 require_once('includes/blocks-css-classes.php');
+require_once('includes/focus-point.php');
 
 add_action('after_setup_theme', function () {
     register_nav_menus([
@@ -288,6 +289,20 @@ add_action('enqueue_block_editor_assets', function () {
             true
         );
     }
+
+    // Trigger focus point application in editor
+    wp_add_inline_script('theme-editor-script', '
+        if (typeof applyFocusPoints === "function") {
+            document.addEventListener("DOMContentLoaded", function() {
+                applyFocusPoints();
+                document.querySelectorAll("img[data-focus-x][data-focus-y]").forEach(function(img) {
+                    if (!img.complete) {
+                        img.addEventListener("load", applyFocusPoints);
+                    }
+                });
+            });
+        }
+    ');
 });
 
 // change file upload slug to prevent conflicts with posts and pages
