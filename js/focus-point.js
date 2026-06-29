@@ -118,6 +118,10 @@
         if (!attachmentId || !imageUrl) return;
         if ($sidebar.find('.gs-fp-btn').length) return;
 
+        // Ensure attachmentId is a number
+        attachmentId = parseInt(attachmentId, 10);
+        if (!attachmentId || isNaN(attachmentId)) return;
+
         const $btn = $(`
             <span class="setting gs-fp-field">
                 <label class="name">${gsFocusPoint.label}</label>
@@ -159,56 +163,60 @@
     function startObserver() {
         const observer = new MutationObserver(function () {
             // Look for any visible attachment details sidebar
-            const $sidebar = $('.attachment-details:visible, .media-sidebar:visible');
-            if (!$sidebar.length) return;
-            if ($sidebar.find('.gs-fp-btn').length) return; // already done
+            const $sidebars = $('.attachment-details:visible, .media-sidebar:visible');
+            if (!$sidebars.length) return;
 
-            // Try to get attachment ID from the sidebar itself or from wp.media
-            let attachmentId = null;
-            let imageUrl     = null;
+            $sidebars.each(function() {
+                const $sidebar = $(this);
+                if ($sidebar.find('.gs-fp-btn').length) return; // already done for this sidebar
 
-            // Method 1: from wp.media selection
-            try {
-                if (wp.media.frame) {
-                    const state = wp.media.frame.state();
-                    if (state) {
-                        const selection = state.get('selection');
-                        if (selection && selection.single && selection.single()) {
-                            const model = selection.single();
-                            if (model && model.get('type') === 'image') {
-                                attachmentId = model.get('id');
-                                imageUrl     = model.get('url');
-                            }
-                        }
-                    }
-                }
-            } catch (e) {}
+                // Try to get attachment ID from the sidebar itself or from wp.media
+                let attachmentId = null;
+                let imageUrl     = null;
 
-            // Method 2: from data attribute on sidebar
-            if (!attachmentId) {
+                // Method 1: from data attribute on sidebar (most reliable)
                 const dataId = $sidebar.attr('data-id') || $sidebar.find('[data-id]').first().attr('data-id');
                 if (dataId) attachmentId = parseInt(dataId, 10);
-            }
 
-            // Method 3: from file URL field
-            if (!imageUrl) {
-                const $urlInput = $sidebar.find('input[value*="/wp-content/uploads/"]');
-                if ($urlInput.length) {
-                    imageUrl = $urlInput.val();
+                // Method 2: from wp.media selection
+                if (!attachmentId) {
+                    try {
+                        if (wp.media.frame) {
+                            const state = wp.media.frame.state();
+                            if (state) {
+                                const selection = state.get('selection');
+                                if (selection && selection.single && selection.single()) {
+                                    const model = selection.single();
+                                    if (model && model.get('type') === 'image') {
+                                        attachmentId = model.get('id');
+                                        imageUrl     = model.get('url');
+                                    }
+                                }
+                            }
+                        }
+                    } catch (e) {}
                 }
-            }
 
-            // Method 4: from the thumbnail img src
-            if (!imageUrl) {
-                const $thumb = $sidebar.find('.thumbnail img, .attachment-media-view img');
-                if ($thumb.length) {
-                    imageUrl = $thumb.attr('src');
+                // Method 3: from file URL field
+                if (!imageUrl) {
+                    const $urlInput = $sidebar.find('input[value*="/wp-content/uploads/"]');
+                    if ($urlInput.length) {
+                        imageUrl = $urlInput.val();
+                    }
                 }
-            }
 
-            if (attachmentId && imageUrl) {
-                injectButtonIntoSidebar($sidebar, attachmentId, imageUrl);
-            }
+                // Method 4: from the thumbnail img src
+                if (!imageUrl) {
+                    const $thumb = $sidebar.find('.thumbnail img, .attachment-media-view img');
+                    if ($thumb.length) {
+                        imageUrl = $thumb.attr('src');
+                    }
+                }
+
+                if (attachmentId && imageUrl) {
+                    injectButtonIntoSidebar($sidebar, attachmentId, imageUrl);
+                }
+            });
         });
 
         observer.observe(document.body, { childList: true, subtree: true });
