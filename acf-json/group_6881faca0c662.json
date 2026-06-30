@@ -29,33 +29,6 @@
             "preview_size": "medium"
         },
         {
-            "key": "field_689ca6a3419f9",
-            "label": "Uitlijning afbeelding",
-            "name": "align_image",
-            "aria-label": "",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "top": "Boven",
-                "center": "Midden",
-                "bottom": "Onder"
-            },
-            "default_value": "center",
-            "return_format": "value",
-            "allow_null": 0,
-            "other_choice": 0,
-            "allow_in_bindings": 0,
-            "layout": "vertical",
-            "save_other_choice": 0
-        },
-        {
             "key": "field_6881fae02f9ed",
             "label": "Title",
             "name": "title",
@@ -134,5 +107,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1765282528
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1782717993
 }

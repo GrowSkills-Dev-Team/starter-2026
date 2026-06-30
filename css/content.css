@@ -199,10 +199,6 @@
       background: transparent linear-gradient(15deg, #00000000 0%, #000000FC 84%, #000000 0%) 0% 0% no-repeat padding-box;
       opacity: 0.5;
     }
-
-    img{
-      object-position: center var(--valign, 50%);
-    }
   }
 
 
@@ -234,8 +230,6 @@
       @media(min-width:101.125rem) {
         margin-left: 0;
       }
-
-
 
       h1 {
         color: var(--secundairy-text-color);

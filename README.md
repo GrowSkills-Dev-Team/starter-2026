@@ -112,6 +112,30 @@ Blocks are auto-registered by the `init` hook in `functions.php`. Add a new bloc
 | `css/` | Source CSS files (edit these) |
 | `assets/build/` | Compiled CSS output (do not edit) |
 | `js/` | Theme scripts |
+| `includes/focus-point.php` | Focus point functionality for images |
+| `js/focus-point.js` | Focus point admin interface |
+| `css/focus-point-admin.css` | Focus point modal styles |
+
+---
+
+## Focus Point Feature
+
+The theme includes a focus point feature that allows editors to set an image focus point (x%, y%) in the WordPress Media Library.
+
+### How it works
+- Adds a "Set focus point" button in the Media Library attachment details
+- Click on the image to set the focus point
+- The focus point is stored as post meta (`_gs_focus_point_x` and `_gs_focus_point_y`)
+- Images get `data-focus-x` and `data-focus-y` attributes automatically
+
+### Helper functions
+- `gs_get_focus_point(int $attachment_id): array` - Returns the focus point coordinates
+- `gs_focus_point_css(int $attachment_id): string` - Returns CSS `object-position` value
+
+### Files
+- `includes/focus-point.php` - PHP logic for saving/retrieving focus points
+- `js/focus-point.js` - Admin interface for selecting focus points
+- `css/focus-point-admin.css` - Modal styles
 
 ---
 

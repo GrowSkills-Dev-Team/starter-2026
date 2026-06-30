@@ -89,6 +89,16 @@ function theme_image($image_id_or_url, $context = 'content', $class = '') {
         'decoding' => 'async'
     ];
 
+    // Focus point — JS calculates object-position to center the focal point
+    if (is_numeric($image_id)) {
+        $fp_x = get_post_meta($image_id, '_gs_focus_point_x', true);
+        $fp_y = get_post_meta($image_id, '_gs_focus_point_y', true);
+        if ($fp_x !== '' && $fp_y !== '') {
+            $attr['data-focus-x'] = floatval($fp_x);
+            $attr['data-focus-y'] = floatval($fp_y);
+        }
+    }
+
     switch ($context) {
 
         case 'hero':
@@ -176,8 +186,20 @@ function theme_image_attrs($image_id_or_url, $context = 'content', $class = '') 
     $image_meta = wp_get_attachment_metadata($image_id);
     $alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
     
+    // Focus point — JS calculates object-position to center the focal point
+    $fp_x_val = '';
+    $fp_y_val = '';
+    if (is_numeric($image_id)) {
+        $fp_x_val = get_post_meta($image_id, '_gs_focus_point_x', true);
+        $fp_y_val = get_post_meta($image_id, '_gs_focus_point_y', true);
+    }
+
     // Bouw attributen string
     $attrs = [];
+    if ($fp_x_val !== '' && $fp_y_val !== '') {
+        $attrs[] = 'data-focus-x="' . floatval($fp_x_val) . '"';
+        $attrs[] = 'data-focus-y="' . floatval($fp_y_val) . '"';
+    }
     if ($srcset) $attrs[] = 'srcset="' . esc_attr($srcset) . '"';
     if ($sizes) $attrs[] = 'sizes="' . esc_attr($sizes) . '"';
     if ($alt) $attrs[] = 'alt="' . esc_attr($alt) . '"';
