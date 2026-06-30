@@ -71,6 +71,10 @@ p.wp-caption-text{
                 text-indent: -1em;
             }
         }
+
+        li{
+            color: var(--dark-text-color);
+        }
     }
 
     ul {
