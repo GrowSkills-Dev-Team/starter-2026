@@ -39,3 +39,4 @@ debug.log
 *.tar.gz
 *.bak
 *.swp
+release/
