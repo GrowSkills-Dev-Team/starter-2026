@@ -52,6 +52,7 @@ After running `watch:css`, just save your CSS file and refresh the browser — n
 |---|---|
 | `build:css` | Compiles `frontend.css` and `editor.css` once |
 | `watch:css` | Watches both files and recompiles on save |
+| `zip` | Builds CSS and creates a production-ready .zip of the theme |
 
 Output files:
 - `assets/build/front-end.css`
@@ -65,6 +66,7 @@ Output files:
 |---|---|
 | Starting development | `npm run watch:css` |
 | Before git push / deploy | `npm run build:css` |
+| Creating production zip | `npm run zip` |
 | After cloning the repo | `npm install` then `npm run build:css` |
 
 ---
@@ -115,6 +117,24 @@ Blocks are auto-registered by the `init` hook in `functions.php`. Add a new bloc
 | `includes/focus-point.php` | Focus point functionality for images |
 | `js/focus-point.js` | Focus point admin interface |
 | `css/focus-point-admin.css` | Focus point modal styles |
+
+---
+
+## Theme Zip Script
+
+The theme includes a zip script that builds the CSS and creates a production-ready .zip file.
+
+### Usage
+```bash
+npm run zip
+```
+
+This will:
+1. Build the CSS (runs `npm run build:css`)
+2. Create a .zip file in the `release/` folder
+3. Exclude development files (node_modules, .git, etc.)
+
+The zip file is named `{theme-name}-{version}.zip` based on the values in `package.json`.
 
 ---
 
