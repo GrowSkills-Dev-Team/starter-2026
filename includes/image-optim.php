@@ -67,7 +67,7 @@ add_filter('wp_editor_set_quality', function($quality) {
     return 80;
 });
 
-function theme_image($image_id_or_url, $context = 'content', $class = '') {
+function theme_image($image_id_or_url, $context = 'content', $class = '', $context_suffix = '') {
 
     if (!$image_id_or_url) return '';
     
@@ -89,15 +89,9 @@ function theme_image($image_id_or_url, $context = 'content', $class = '') {
         'decoding' => 'async'
     ];
 
-    // Focus point — JS calculates object-position to center the focal point
-    if (is_numeric($image_id)) {
-        $fp_x = get_post_meta($image_id, '_gs_focus_point_x', true);
-        $fp_y = get_post_meta($image_id, '_gs_focus_point_y', true);
-        if ($fp_x !== '' && $fp_y !== '') {
-            $attr['data-focus-x'] = floatval($fp_x);
-            $attr['data-focus-y'] = floatval($fp_y);
-        }
-    }
+    // Focus point (aplicado via wp_get_attachment_image_attributes filter em
+    // includes/focus-point.php, que já usa gs_get_focus_point() com contexto
+    // e injeta object-position diretamente no style — não é preciso repetir aqui)
 
     switch ($context) {
 
@@ -127,7 +121,12 @@ function theme_image($image_id_or_url, $context = 'content', $class = '') {
             break;
     }
 
-    return wp_get_attachment_image($image_id, $size, false, $attr);
+    global $gs_focus_context_suffix;
+    $gs_focus_context_suffix = $context_suffix;
+    $html = wp_get_attachment_image($image_id, $size, false, $attr);
+    $gs_focus_context_suffix = '';
+
+    return $html;
 }
 
 /**
@@ -136,8 +135,14 @@ function theme_image($image_id_or_url, $context = 'content', $class = '') {
  * 
  * Dit behoudt de originele <img> tag waar ACF zijn data-attributen aan toevoegt,
  * maar voegt wel srcset, sizes, alt, width, height etc. toe voor optimalisatie.
+ *
+ * Focus point: deze functie bouwt de <img> tag handmatig op (buiten
+ * wp_get_attachment_image() om), dus het wp_get_attachment_image_attributes
+ * filter in includes/focus-point.php wordt hier NIET aangeroepen. Daarom
+ * halen we het focuspunt hier expliciet op via gs_get_focus_point() (met
+ * context) en zetten we het rechtstreeks in de inline style.
  */
-function theme_image_attrs($image_id_or_url, $context = 'content', $class = '') {
+function theme_image_attrs($image_id_or_url, $context = 'content', $class = '', $context_suffix = '') {
     
     if (!$image_id_or_url) return '';
     
@@ -186,20 +191,25 @@ function theme_image_attrs($image_id_or_url, $context = 'content', $class = '') 
     $image_meta = wp_get_attachment_metadata($image_id);
     $alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
     
-    // Focus point — JS calculates object-position to center the focal point
-    $fp_x_val = '';
-    $fp_y_val = '';
-    if (is_numeric($image_id)) {
-        $fp_x_val = get_post_meta($image_id, '_gs_focus_point_x', true);
-        $fp_y_val = get_post_meta($image_id, '_gs_focus_point_y', true);
+    // Focus point — via het gecentraliseerde systeem in includes/focus-point.php,
+    // met context (zelfde afbeelding kan een ander focuspunt hebben per post/pagina).
+    $style_attr = '';
+    if (is_numeric($image_id) && function_exists('gs_get_focus_point') && function_exists('gs_current_focus_context')) {
+        $context_id = gs_current_focus_context();
+        if ($context_suffix) {
+            $context_id .= '_' . sanitize_key($context_suffix);
+        }
+        $point = gs_get_focus_point((int) $image_id, $context_id);
+
+        if (!($point['x'] === 50.0 && $point['y'] === 50.0)) {
+            $position = esc_attr($point['x'] . '% ' . $point['y'] . '%');
+            $style_attr = 'style="object-position: ' . $position . ';"';
+        }
     }
 
     // Bouw attributen string
     $attrs = [];
-    if ($fp_x_val !== '' && $fp_y_val !== '') {
-        $attrs[] = 'data-focus-x="' . floatval($fp_x_val) . '"';
-        $attrs[] = 'data-focus-y="' . floatval($fp_y_val) . '"';
-    }
+    if ($style_attr) $attrs[] = $style_attr;
     if ($srcset) $attrs[] = 'srcset="' . esc_attr($srcset) . '"';
     if ($sizes) $attrs[] = 'sizes="' . esc_attr($sizes) . '"';
     if ($alt) $attrs[] = 'alt="' . esc_attr($alt) . '"';

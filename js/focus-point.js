@@ -1,6 +1,8 @@
 /**
  * GrowSkills Focus Point
  * Adds a focus point button to the WordPress Media Library attachment details.
+ * Focus point is saved per (attachment + context), so the same image can have
+ * a different focus point depending on which post/page it's used in.
  */
 (function ($) {
     'use strict';
@@ -8,7 +10,50 @@
     if (typeof wp === 'undefined' || !wp.media) return;
 
     let currentAttachmentId = null;
+    let currentContextId = 'global';
     let $modal = null;
+
+    function getContextId() {
+        let context = 'global';
+
+        // ACF (includes options pages) exposes the current post id via acf.get('post_id')
+        if (typeof acf !== 'undefined' && typeof acf.get === 'function') {
+            const acfPostId = acf.get('post_id');
+            if (acfPostId) context = 'post_' + acfPostId;
+        }
+
+        // Classic editor / hidden field also kept by Gutenberg
+        if (context === 'global') {
+            const $postId = $('#post_ID');
+            if ($postId.length && $postId.val()) {
+                context = 'post_' + $postId.val();
+            }
+        }
+
+        // Fallback via Gutenberg data store
+        if (context === 'global' && window.wp && wp.data && wp.data.select('core/editor')) {
+            const id = wp.data.select('core/editor').getCurrentPostId();
+            if (id) context = 'post_' + id;
+        }
+
+        // Se o botão foi aberto dentro de um bloco ACF no Gutenberg, junta o ID
+        // persistente desse bloco — assim a mesma imagem em blocos diferentes
+        // no mesmo post não partilha o mesmo focus point. Isto tem de bater
+        // certo com $block['id'] usado no PHP (gs_current_focus_context()).
+        try {
+            if (window.wp && wp.data && wp.data.select('core/block-editor')) {
+                const clientId = wp.data.select('core/block-editor').getSelectedBlockClientId();
+                if (clientId) {
+                    const attrs = wp.data.select('core/block-editor').getBlockAttributes(clientId);
+                    if (attrs && attrs.id) {
+                        context += '_' + attrs.id;
+                    }
+                }
+            }
+        } catch (e) {}
+
+        return context;
+    }
 
     function buildModal() {
         $modal = $(`
@@ -66,6 +111,7 @@
         if (!$modal) buildModal();
 
         currentAttachmentId = attachmentId;
+        currentContextId = getContextId();
         $modal.find('.gs-fp-modal__img').attr('src', imageUrl);
         $modal.addClass('is-visible');
 
@@ -73,6 +119,7 @@
             action: 'gs_get_focus_point',
             nonce: gsFocusPoint.nonce,
             attachment_id: attachmentId,
+            context_id: currentContextId,
         }, function (res) {
             if (res.success) {
                 moveCrosshair(res.data.x, res.data.y);
@@ -83,6 +130,7 @@
     function closeModal() {
         if ($modal) $modal.removeClass('is-visible');
         currentAttachmentId = null;
+        currentContextId = 'global';
     }
 
     function moveCrosshair(x, y) {
@@ -103,6 +151,7 @@
             action: 'gs_save_focus_point',
             nonce: gsFocusPoint.nonce,
             attachment_id: currentAttachmentId,
+            context_id: currentContextId,
             x: x,
             y: y,
         }, function (res) {
