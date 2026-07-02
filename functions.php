@@ -9,6 +9,7 @@ require_once('includes/image-optim.php');
 require_once('includes/wcag.php');
 require_once('includes/blocks-css-classes.php');
 require_once('includes/focus-point.php');
+require_once('includes/role-restrictions.php');
 
 add_action('after_setup_theme', function () {
     register_nav_menus([
