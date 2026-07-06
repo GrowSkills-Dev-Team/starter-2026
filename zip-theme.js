@@ -17,7 +17,7 @@ const themeName = pkg.name || "theme";
 const version = pkg.version || "1.0.0";
 
 const outputDir = path.join(__dirname, "release");
-const outputFile = path.join(outputDir, `${themeName}-${version}.zip`);
+const outputFile = path.join(outputDir, `${themeName}.zip`);
 
 const IGNORE_PATTERNS = [
   "node_modules",
