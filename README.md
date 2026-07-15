@@ -1,5 +1,8 @@
 # Starter 2026 Theme (GS Custom Theme)
 
+![Screenshot do tema](screenshot.png)
+
+
 A custom WordPress theme built with ACF (Advanced Custom Fields) blocks.
 
 Version: 2.0.1 — Theme name and version are defined in `style.css`.
