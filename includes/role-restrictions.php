@@ -2,7 +2,6 @@
 /* =========================================================
  * USER PAGE EDIT RESTRICTIONS — wp-admin (starter-2026)
  * Each listed user can edit only one (or multiple) specific page(s)
- * Uses native WordPress user meta (no ACF)
  * ========================================================= */
 
 // 1. Options Page - Native WordPress
@@ -21,11 +20,6 @@ function gs_role_restrictions_page() {
     if ( isset( $_POST['gs_save_restrictions'] ) ) {
         check_admin_referer( 'gs_restrictions_nonce' );
 
-        // FIX: sempre inicializa como array vazio e sempre chama update_option,
-        // mesmo quando $_POST['page_restrictions'] não existe (ex: última linha removida).
-        // Antes, se a tabela ficasse vazia, o isset() falhava e update_option()
-        // nunca era chamado — a opção antiga no banco permanecia intacta,
-        // fazendo o usuário "removido" reaparecer após salvar.
         $restrictions = array();
 
         if ( isset( $_POST['page_restrictions'] ) && is_array( $_POST['page_restrictions'] ) ) {

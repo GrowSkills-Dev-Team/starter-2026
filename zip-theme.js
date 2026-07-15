@@ -1,9 +1,9 @@
 /**
  * zip-theme.js
- * Builda o CSS e gera um .zip do tema, pronto para enviar ao cliente
- * ou subir no WordPress, excluindo node_modules, .git e arquivos de dev.
+ * Builds the CSS and generates a theme .zip, ready to send to the client
+ * or upload to WordPress, excluding node_modules, .git, and dev files.
  *
- * Uso:
+ * Usage:
  *   npm run zip
  */
 
@@ -51,7 +51,7 @@ function shouldIgnore(relativePath) {
 }
 
 function main() {
-  console.log("🔨 Buildando CSS...");
+  console.log("Building CSS...");
   execSync("npm run build:css", { stdio: "inherit" });
 
   if (!fs.existsSync(outputDir)) {
@@ -62,14 +62,14 @@ function main() {
     fs.unlinkSync(outputFile);
   }
 
-  console.log(`📦 Gerando ${path.relative(__dirname, outputFile)}...`);
+  console.log(`📦 Generating ${path.relative(__dirname, outputFile)}...`);
 
   const output = fs.createWriteStream(outputFile);
   const archive = archiver("zip", { zlib: { level: 9 } });
 
   output.on("close", () => {
     const sizeMB = (archive.pointer() / 1024 / 1024).toFixed(2);
-    console.log(`✅ Zip criado com sucesso: ${outputFile} (${sizeMB} MB)`);
+    console.log(`✅ Zip created successfully: ${outputFile} (${sizeMB} MB)`);
   });
 
   archive.on("warning", (err) => {
