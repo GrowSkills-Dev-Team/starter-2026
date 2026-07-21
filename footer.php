@@ -19,8 +19,14 @@
                             <ul>
                                 <?php while(have_rows('menu_items')) : the_row();
                                     $menu_link = get_sub_field('menu_link');
-                                    ?>
-                                <li><a href="<?= $menu_link['url'] ?>" target="<?= $menu_link['target'] ?>"><?= $menu_link['title'] ?></a></li>
+                                ?>
+                                    <?php if($menu_link && !empty($menu_link['url'])) : ?>
+                                    <li>
+                                        <a href="<?= esc_url($menu_link['url']); ?>" target="<?= esc_attr($menu_link['target'] ?: '_self'); ?>">
+                                            <?= esc_html($menu_link['title'] ?: $menu_link['url']); ?>
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
                                 <?php endwhile; ?>
                             </ul>
                         </div>
